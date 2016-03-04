@@ -1,0 +1,13 @@
+﻿RewriteEngine on
+RewriteBase /
+
+ErrorDocument 404 /includes/internal/error.php
+ErrorDocument 500 /includes/internal/error.php
+ErrorDocument 400 /includes/internal/error.php
+ErrorDocument 401 /includes/internal/error.php
+ErrorDocument 403 /includes/internal/error.php
+
+<FilesMatch "\.(txt)$">
+ Order Deny,Allow
+ Deny from All
+</FilesMatch>
