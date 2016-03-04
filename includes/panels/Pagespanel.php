@@ -32,6 +32,38 @@ if (isset ($_GET["neu"])) {
             <textarea name='pagecontent' cols='70' rows='35'></textarea> <br />
             <input type='submit' value='Absenden'>";
 		}
+	} else {
+	    echo "Nicht ausreichende Rechte!";
+	}
+} else if (isset ($_GET["delete"])) {
+	if ($rechte == "1") {
+	    if(!isset($_GET["page"])) {
+            $query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` ASC";
+    		$result = $mysqli_connect->query($query);
+            // if($debug) { var_dump($result); }
+    		while ($row = mysqli_fetch_object($result)) {
+    		    // if($debug) { var_dump($row); }
+    			$titel = $row->name;
+                $id = $row->id;
+    			echo "<a href='?id=0&amp;ap=Pages&amp;delete=true&amp;page=".$id."'>".$titel."<br />\n";
+    		}
+        } else {
+            $pageid = $mysqli_connect->real_escape_string($_GET["page"]);
+
+            $query = "SELECT * FROM `pages` WHERE `id` = ".$pageid;
+    		$result = $mysqli_connect->query($query);
+            $row = mysqli_fetch_object($result);
+
+            echo "ID der Seite: ". $row->id ." <br /> \n
+            Name: " . $row->name . "<br /> \n
+            Erstellungsdatum: " . $row->date_created . "<br /> \n
+            Seite aus /includes/?: " . $row->include . "<br /> \n";
+
+            echo "<a href='?id=0&ap=Pages&pageid=".$pageid."&action=delete'>L&ouml;schen</a>";
+
+        }
+	} else {
+	    echo "Nicht ausreichende Rechte!";
 	}
 } elseif (isset ($_GET["reihenfolge"]) && $_GET["reihenfolge"]) {
 	echo "Reihenfolge<br />";
@@ -87,7 +119,6 @@ if (isset ($_GET["neu"])) {
 			if (@$_POST["action"] == "update") {
 				$pagecontent = mysqli_real_escape_string($mysqli_connect, $_POST['pagecontent']);
 				$pagetitle = mysqli_real_escape_string($mysqli_connect, $_POST['titel']);
-				$pageid = mysqli_real_escape_string($mysqli_connect, $_GET['pageid']);
 				@$pageincludes = mysqli_real_escape_string($mysqli_connect, $_POST['include']);
 				if (!$pageincludes) {
 					$pageincludes = "false";
@@ -96,7 +127,7 @@ if (isset ($_GET["neu"])) {
 				$mysqli_connect->query($updatesql);
                 if($debug) { var_dump($updatesql); }
 				echo 'Seite erfolgreich bearbeitet! Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
-			} elseif(@$_POST["action"] == "delete") {
+			} elseif(@$_GET["action"] == "delete") {
                 $updatesql = "delete from `pages` WHERE `ID` = " . $pageid . " limit 1;";
 				$mysqli_connect->query($updatesql);
 				echo 'Seite erfolgreich gelöscht! Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
@@ -120,7 +151,8 @@ if (isset ($_GET["neu"])) {
 		}
 	} else {
 		if ($rechte == "1") {
-			echo '<a href="?id=0&ap=Pages&neu=true">Neue Seite erstellennews&nbsp;</a><br />';
+			echo '<a href="?id=0&ap=Pages&neu=true">Neue Seite erstellen</a><br />';
+            echo '<a href="?id=0&ap=Pages&delete=true">Bestehende Seite löschen</a><br />';
 			echo '<a href="?id=0&ap=Pages&reihenfolge=true">Reihenfolge der Seiten ändern</a>';
 		}
 		$query = "SELECT * FROM `pages`";
