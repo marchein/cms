@@ -143,7 +143,7 @@ if($isinclude) {
                     <input type='hidden' name='action' value='update'>
                     Titel:<br /><input name='titel' value='" . $row->name . "' size='20'><br />
                     Seite aus /includes/: <input type='checkbox' name='include' value='true'";
-                    if ($row->include == "true") {
+                    if ($row->included == "true") {
                         echo " checked";
                     }
                     echo "><br />
