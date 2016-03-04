@@ -12,6 +12,14 @@ function getRechte($user) {
     return $rechte;
 }
 
+function getRechteName($rechte) {
+    if($rechte == 0) { $rechtename = "Gesperrt"; }
+    if($rechte == 1) { $rechtename = "Administrator"; }
+    if($rechte == 2) { $rechtename = "Moderator"; }
+    if($rechte == 3) { $rechtename = "Nutzer"; }
+    return $rechtename;
+}
+
 session_start();
 if(isset($_POST['login']))  {
     $query   = "SELECT name, password FROM `user` WHERE name ='" . $_POST['login'] . "'";
