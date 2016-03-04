@@ -1,3 +1,4 @@
 ﻿<?php
-echo "<h1>Test</h1>";
+echo "<h1>Testpage</h1>";
+var_dump(getPanelNames());
 ?>

@@ -13,10 +13,11 @@ if ($is_login) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {
                     $panel = str_replace("panel.php","", $entry);
+                    $panelnames = getPanelNames();
                     if(isset($ap) && $ap == $panel) {
                         include("includes/panels/".$entry);
                     } else {
-                        echo "<a href='".url()."/?id=0&amp;ap=".$panel."'>".$panel."</a><br />\n";
+                        echo "<a href='".url()."/?id=0&amp;ap=".$panel."'>".$panelnames[$panel]."</a><br />\n";
                     }
                 }
             }

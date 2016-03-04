@@ -87,4 +87,20 @@ require_once("internalFeatures.php");
 if(getDebug()) {
     setBuild();
 }
+
+function getPanelNames() {
+    $panelnames[] = array();
+    $isinclude = false;
+    if ($handle = opendir('includes/panels')) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                $panel = str_replace("panel.php","", $entry);
+                include("includes/panels/".$entry);
+            }
+        }
+        closedir($handle);
+    }
+    $isinclude = true;
+    return $panelnames;
+}
 ?>
