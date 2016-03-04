@@ -83,6 +83,14 @@ function getPageName() {
     return $config->name;
 }
 
+function getRechteName($rechte) {
+    if($rechte == 0) { $rechtename = "Gesperrt"; }
+    if($rechte == 1) { $rechtename = "Administrator"; }
+    if($rechte == 2) { $rechtename = "Moderator"; }
+    if($rechte == 3) { $rechtename = "Nutzer"; }
+    return $rechtename;
+}
+
 require_once("internalFeatures.php");
 if(getDebug()) {
     setBuild();
