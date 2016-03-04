@@ -148,7 +148,7 @@ if($isinclude) {
                     }
                     echo "><br />
                     Seiteninhalt:<br />
-                    <textarea name='pagecontent' cols='60' rows='25'>" . $row->content . "</textarea> <br />
+                    <textarea name='pagecontent' cols='60' rows='20'>" . $row->content . "</textarea> <br />
                     <input type='submit' value='Absenden'>";
                 }
     		}
