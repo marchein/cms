@@ -40,7 +40,7 @@ function getContent() {
   if ($id == "") {
     $id = 1;
   }
-  $query = "SELECT id, name, include FROM pages WHERE `id` = '" . $id . "'";
+  $query = "SELECT id, name, included FROM pages WHERE `id` = '" . $id . "'";
   $result = $mysqli_connect->query($query);
   if (mysqli_num_rows($result) == 0) {
     $error = "page";
@@ -54,24 +54,23 @@ function getContent() {
       $page = $page->name;
     }
     while ($row = mysqli_fetch_object($result)) {
-      if ($debug) {
-        echo "<br /><b>";
-        var_dump($row);
-        echo "</b>";
-      }
-      if ($row->include == "true") {
-        $file = "includes/pages/" . $row->name . "content.php";
-        if (file_exists($file)) {
-          include ($file);
+        if ($debug) {
+            echo "<br /><b>";
+            var_dump($row);
+            echo "</b>";
         }
-        else {
-          $error = "file";
-          include ("includes/internal/error.php");
+        $inc = $row->included;
+        if ($inc == "true") {
+            $file = "includes/pages/" . $row->name . "content.php";
+            if (file_exists($file)) {
+                include ($file);
+            } else {
+                $error = "file";
+                include ("includes/internal/error.php");
+            }
+        } else if ($inc == "false"){
+            include ("includes/internal/page.php");
         }
-      }
-      elseif ($row->include == "false") {
-        include ("includes/internal/page.php");
-      }
     }
   }
   if ($debug) {
