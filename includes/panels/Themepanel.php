@@ -3,7 +3,7 @@ $panelnames["Theme"] = "Design"; // set panel name
 if(!isset($isinclude)) { $isinclude = true; } // if unset, set it to true
 
 if($isinclude) { // if included don't run this code, if $isinclude is true -> run code
-    if ($handle = opendir('themes/')) { // open theme folder and look for themes
+    if ($handle = opendir('includes/themes')) { // open theme folder and look for themes
         $themes = array(); // initiate array
         $themes[0] = "default"; // set default to [0]
         while (($entry = readdir($handle)) !== false) { // check if handle is dir or file
