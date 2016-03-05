@@ -20,7 +20,7 @@ $news_nums = $result->num_rows;
             } else {
                 $row = mysqli_fetch_object($result);
                 echo "<h3>" . $row->title . "</h3>
-                " . $row->content . "";
+                " . htmlspecialchars_decode($row->content) . "";
             }
         } else {
             if(!isset($_GET["offset"])) {
@@ -36,7 +36,7 @@ $news_nums = $result->num_rows;
 
             while($row = mysqli_fetch_object($query)) {
                 echo "<h4><a href='".url()."/?id=".$_GET["id"]."&amp;newsid=".$row->id."'>".$row->title."</a></h4>";
-                echo $row->content;
+                echo htmlspecialchars_decode($row->content);
             }
 
             $before_offset = $offset - $limit;
