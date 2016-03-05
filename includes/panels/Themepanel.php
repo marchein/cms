@@ -20,13 +20,11 @@ if($isinclude) { // if included don't run this code, if $isinclude is true -> ru
         $mysqli_connect->query($query);
         echo '<br />Design ge&auml;ndert. Klicke <a href="?id=0">hier</a> um fortzufahren.';
     } else {
-        $sql = "SELECT theme FROM config"; // fetch current theme
-        $currenttheme = mysqli_fetch_object($mysqli_connect->query($sql))->theme; // store it in $currenttheme
         echo'<form method="post" action="?id=0&ap=Theme">
           <input type="hidden" name="action" value="write">
           Design: <select name="theme">';
             foreach($themes as $theme) { // show all themes in theme folder
-                ($theme == $currenttheme) ? $option = "\n<option selected value=\"".$theme."\">" : $option =  "\n<option value=\"".$theme."\">"; // pre select current theme
+                ($theme == getCurrentTheme()) ? $option = "\n<option selected value=\"".$theme."\">" : $option =  "\n<option value=\"".$theme."\">"; // pre select current theme
                 echo $option.$theme."</option>"; // show options
             }
           echo'</select>

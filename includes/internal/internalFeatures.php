@@ -1,5 +1,5 @@
 ﻿<?php
-
+require_once("features.php");
 function getHash($hash){
     return hash('SHA512', $hash);
 }
@@ -26,9 +26,14 @@ function getLoggedIn() {
     }
 }
 
+function getCurrentTheme() {
+    $sql = "SELECT theme FROM config"; // fetch current theme
+    return mysqli_fetch_object($GLOBALS["mysqli_connect"]->query($sql))->theme; // return current theme
+}
+
 function getNavigation() {
     echo"<navigation>";
-      include ("includes/templates/navigation.tpl.php");
+      include ($GLOBALS["path"]."/navigation.tpl.php");
     echo "</navigation>";
 }
 

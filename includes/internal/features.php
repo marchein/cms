@@ -91,7 +91,6 @@ function getRechteName($rechte) {
     return $rechtename;
 }
 
-require_once("internalFeatures.php");
 if(getDebug()) {
     setBuild();
 }
@@ -111,4 +110,12 @@ function getPanelNames() {
     $isinclude = true;
     return $panelnames;
 }
+
+$currenttheme = getCurrentTheme();
+if($currenttheme == "default") {
+    $path = "includes/templates";
+} else {
+    $path = "includes/themes/".$currenttheme;
+}
+$GLOBALS["path"] = $path;
 ?>
