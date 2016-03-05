@@ -97,17 +97,17 @@ if(getDebug()) {
 }
 
 function getPanelNames() {
-    $panelnames[] = array();
-    $isinclude = false;
-    if ($handle = opendir('includes/panels')) {
-        while (false !== ($entry = readdir($handle))) {
+    $panelnames[] = array(); // initiate array, gets filled by the $panelnames from the unique panels
+    $isinclude = false; //
+    $dir = "includes/panels"; // link to panels folder
+    if (@$handle = opendir($dir)) {
+        while (($entry = readdir($handle)) !== false) {
             if ($entry != "." && $entry != "..") {
-                $panel = str_replace("panel.php","", $entry);
-                include("includes/panels/".$entry);
+                include($dir."/".$entry);
             }
         }
-        closedir($handle);
     }
+    closedir($handle);
     $isinclude = true;
     return $panelnames;
 }
