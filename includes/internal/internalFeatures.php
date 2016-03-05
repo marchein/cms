@@ -28,7 +28,7 @@ function getLoggedIn() {
 
 function getNavigation() {
     echo"<navigation>";
-      include ("navigation.php");
+      include ("includes/templates/navigation.tpl.php");
     echo "</navigation>";
 }
 

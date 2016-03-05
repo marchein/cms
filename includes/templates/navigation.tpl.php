@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $is_login = $GLOBALS["is_login"];
 
 $query = $GLOBALS["mysqli_connect"]->query("SELECT id, name FROM `pages` ORDER BY `pages`.`position` ASC");
