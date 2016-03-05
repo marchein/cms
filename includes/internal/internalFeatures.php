@@ -45,8 +45,7 @@ function getContent() {
   if (mysqli_num_rows($result) == 0) {
     $error = "page";
     include ("includes/internal/error.php");
-  }
-  else {
+  } else {
     if ($debug) {
       $query = "SELECT name FROM pages WHERE `id` = '" . $id . "'";
       $name_result = $mysqli_connect->query($query);

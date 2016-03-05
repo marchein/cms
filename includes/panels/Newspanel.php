@@ -1,5 +1,5 @@
 ﻿<?php
-$panelnames["News"] = "Nachrichten";
+$panelnames["News"] = "News";
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_GET["neu"])) {
