@@ -1,7 +1,7 @@
 ﻿<?php
 
 $panelnames["Config"] = "Konfiguration";
-if(!isset($isinclude)) { $isinclude = true; }  
+if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_POST["action"]) && $_POST["action"] == "write") {
         $name = mysqli_real_escape_string($mysqli_connect, $_POST["name"]);
@@ -26,12 +26,12 @@ if($isinclude) {
         <input name='version' size='30' value='" . $ergebnis->version . "'> <br />
         Debug:<br /><select name='debug'>";
         if ($ergebnis->debug) {
-            echo '<option value="true" selected="selected">Aktiviert</option>';
+            echo '<option value="true" selected>Aktiviert</option>';
         } else {
             echo '<option value="true">Aktivieren?</option>';
         }
         if (!$ergebnis->debug) {
-            echo '<option value="false" selected="selected">Deaktiviert</option>';
+            echo '<option value="false" selected>Deaktiviert</option>';
         } else {
             echo '<option value="false">Deaktivieren?</option>';
         }
