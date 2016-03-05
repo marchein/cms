@@ -10,7 +10,7 @@ if ($is_login) {
         include("includes/panels/".$ap."panel.php");
     } else {
         if ($handle = opendir('includes/panels')) {
-            while (false !== ($entry = readdir($handle))) {
+            while (($entry = readdir($handle))!== false) {
                 if ($entry != "." && $entry != "..") {
                     $panel = str_replace("panel.php","", $entry);
                     $panelnames = getPanelNames();
