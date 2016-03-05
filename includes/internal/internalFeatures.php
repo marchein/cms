@@ -40,7 +40,7 @@ function getContent() {
   if ($id == "") {
     $id = 1;
   }
-  $query = "SELECT id, name, included FROM pages WHERE `id` = '" . $id . "'";
+  $query = "SELECT id, name, included FROM pages WHERE `id` = '" . $id . "' LIMIT 0, 1";
   $result = $mysqli_connect->query($query);
   if (mysqli_num_rows($result) == 0) {
     $error = "page";
@@ -58,8 +58,11 @@ function getContent() {
             var_dump($row);
             echo "</b>";
         }
-        $inc = $row->included;
-        if ($inc == "true") {
+        @$inc = $row->included;
+
+        if($inc == 1) { $incl = true; }
+        if($inc == 0) { $incl = false; }
+        if ($incl) {
             $file = "includes/pages/" . $row->name . "content.php";
             if (file_exists($file)) {
                 include ($file);
@@ -67,9 +70,10 @@ function getContent() {
                 $error = "file";
                 include ("includes/internal/error.php");
             }
-        } else if ($inc == "false"){
+        } else {
             include ("includes/internal/page.php");
         }
+        break;
     }
   }
   if ($debug) {
