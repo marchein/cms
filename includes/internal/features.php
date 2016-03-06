@@ -118,4 +118,6 @@ if($currenttheme == "default") {
     $path = "includes/themes/".$currenttheme;
 }
 $GLOBALS["path"] = $path;
+if(!isset($_GET["id"]))
+    $_GET["id"] = 1;
 ?>

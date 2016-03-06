@@ -1,5 +1,4 @@
 ﻿<?php
-    echo '<div class="container">';
 	$mysqli_connect = $GLOBALS["mysqli_connect"];
 	$is_login = $GLOBALS["is_login"];
 	$debug = getDebug();
@@ -49,5 +48,4 @@
 			break;
 		}
 	}
-    echo '</div>';
 ?>

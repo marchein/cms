@@ -18,7 +18,8 @@ echo '
     $query = $GLOBALS["mysqli_connect"]->query("SELECT id, name FROM `pages` WHERE `id` <> 0 ORDER BY `pages`.`position` ASC");
 
     while($result = mysqli_fetch_object($query)) {
-        echo "<li><a href='".url()."/?id=".$result->id."'>".$result->name."</a></li>";
+        ($result->id == $_GET["id"]) ? $active = ' class="active"' : $active = "";
+        echo '<li'.$active.'><a href="'.url().'/?id='.$result->id.'">'.$result->name.'</a></li>';
     }
     $sql = "SELECT id FROM `pages` WHERE `name` LIKE 'Admin'";
     $result = $GLOBALS["mysqli_connect"]->query($sql);
