@@ -5,32 +5,26 @@ if($isinclude) {
     if (isset($_GET["neu"])) {
     	if ($rechte == "1") {
     		if (@ $_POST["action"] == "write") {
-    			$titel = $_POST['titel'];
-    			$titel = htmlspecialchars($titel);
-    			$autor = $_POST['user'];
-    			$content = $_POST['newscontent'];
-    			$content = htmlspecialchars($content);
-    			$query = "INSERT INTO `news` (author, title, content) values('" . $autor . "', '" . $titel . "','" . $content . "');";
+    		    echo "<pre>";print_r($_POST);echo"</pre>";
+    			$titel = htmlspecialchars($_POST['titel']);
+    			$content = htmlspecialchars($_POST['newscontent']);
+    			$query = "INSERT INTO `news` (`id`, `date_created`, `author`, `title`, `content`) VALUES(NULL, CURRENT_TIMESTAMP, '" . $username . "', '" . $titel . "','" . $content . "');";
                 if($debug) { echo $query; }
                 $mysqli_connect->query($query);
     			echo 'News erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=News">hier</a> um fortzufahren.';
     		} else {
-    			echo "<form method='post' name='form2' action='?id=0&amp;ap=News&amp;neu=true'>
-                <input type='hidden' name='id' value='0'>
-                <input type='hidden' name='ap' value='News'>
+    			echo "<form method='post' action='?id=0&amp;ap=News&amp;neu=true'>
                 <input type='hidden' name='action' value='write'>
-                Username:<br />
-                <input name='user' size='20' value='" . $username . "' readonly>
-                <br />
                 Titel:<br /><input name='titel' size='20'><br />
                 Newsinhalt:<br />
                 <textarea name='newscontent' cols='70' rows='35'></textarea> <br />
-                <input type='submit' value='Absenden'>";
+                <input type='submit' value='Absenden'>
+                </form>";
     		}
     	}
     } else {
     	if (isset ($_GET['newsid'])) {
-    		$newsid = mysqli_real_escape_string($mysqli_connect, $_GET['newsid']);
+    		$newsid = $mysqli_connect->real_escape_string($_GET['newsid']);
     		$query = "SELECT * FROM news WHERE `id` = " . $newsid;
     		$result = $mysqli_connect->query($query);
     		if (mysqli_num_rows($result) == 0) {
@@ -39,10 +33,10 @@ if($isinclude) {
     			$row = mysqli_fetch_object($result);
                 if($debug) { var_dump($row); }
     			if (@$_POST["action"] == "update") {
-    				$newscontent = mysqli_real_escape_string($mysqli_connect, $_POST['newscontent']);
-    				$newstitle = mysqli_real_escape_string($mysqli_connect, $_POST['titel']);
-    				$newsid = mysqli_real_escape_string($mysqli_connect, $_GET['newsid']);
-    				$updatesql = "UPDATE `news` SET `title` = '" . $newstitle . "', `content` = '" . $newscontent . "' WHERE `id` = " . $newsid . ";";
+    				$newstext = $mysqli_connect->real_escape_string($_POST['content']);
+    				$newstitle = $mysqli_connect->real_escape_string($_POST['titel']);
+    				$newsid = $mysqli_connect->real_escape_string($_GET['newsid']);
+    				$updatesql = "UPDATE `news` SET `title` = '" . $newstitle . "', `content` = '" . $newstext . "' WHERE `id` = " . $newsid . ";";
     				$mysqli_connect->query($updatesql);
                     if($debug) { var_dump($updatesql); }
     				echo 'News erfolgreich bearbeitet! Klicke <a href="?id=0&amp;ap=News">hier</a> um fortzufahren.';
@@ -52,15 +46,13 @@ if($isinclude) {
     				echo 'News erfolgreich gelöscht! Klicke <a href="?id=0&amp;ap=News">hier</a> um fortzufahren.';
 
                 } else {
-                    echo "<form method='post' name='form2' action='?id=0&amp;ap=News&amp;newsid=" . $newsid . "'>
-                    <input type='hidden' name='id' value='0'>
-                    <input type='hidden' name='ap' value='News'>
-                    <input type='hidden' name='newsid' value='" . $newsid . "'>
+                    echo "<form method='post' action='?id=0&amp;ap=News&amp;newsid=" . $newsid . "'>
                     <input type='hidden' name='action' value='update'>
                     Titel:<br /><input name='titel' value='" . $row->title . "' size='20'><br />
                     Newsinhalt:<br />
-                    <textarea name='newscontent' cols='60' rows='25'>" . $row->content . "</textarea> <br />
-                    <input type='submit' value='Absenden'>";
+                    <textarea name='content' cols='60' rows='25'>" . $row->content . "</textarea> <br />
+                    <input type='submit' value='Absenden'>
+                    </form>";
                 }
     		}
     	} else {
