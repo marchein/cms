@@ -14,24 +14,26 @@ echo '
           </div>
           <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">';
+          echo "\n";
 
     $query = $GLOBALS["mysqli_connect"]->query("SELECT id, name FROM `pages` WHERE `id` <> 0 ORDER BY `pages`.`position` ASC");
 
     while($result = mysqli_fetch_object($query)) {
         ($result->id == $_GET["id"]) ? $active = ' class="active"' : $active = "";
         echo '<li'.$active.'><a href="'.url().'/?id='.$result->id.'">'.$result->name.'</a></li>';
+        echo "\n";
     }
     $sql = "SELECT id FROM `pages` WHERE `name` LIKE 'Admin'";
     $result = $GLOBALS["mysqli_connect"]->query($sql);
     $adminid = (mysqli_fetch_object($result)->id);
-
-    echo'</ul><p class="navbar-btn">
-           <a href="'.url().'/?id='.$adminid.'" class="pull-right navbar-right btn btn-social btn-twitter"><i class="fa fa-lock"></i> Anmelden</a>
-           </p></div><!--/.nav-collapse -->
+    echo'</ul>
+        <p class="navbar-btn">
+        <a href="'.url().'/?id='.$adminid.'" class="pull-right navbar-right btn btn-social btn-twitter"><i class="fa fa-lock"></i> Anmelden</a>
+        </p>
+        </div><!--/.nav-collapse -->
         </div>
       </nav>';
-
-    echo "\n";
+    
 
     if(getDebug()) {
         if($is_login == 1) {

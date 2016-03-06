@@ -34,11 +34,12 @@ function getCurrentTheme() {
 function getNavigation() {
     echo"<navigation>";
       include ($GLOBALS["path"]."/navigation.tpl.php");
-    echo "</navigation>";
+    echo "\n</navigation>\n";
 }
 
 function getContent() {
   include ($GLOBALS["path"]."/content.tpl.php");
+  echo "\n";
   if ($debug) {
     echo "<br /><br />";
     var_dump($_SESSION);

@@ -8,7 +8,7 @@ $news_nums = $result->num_rows;
     } else {
         $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;neu=true'>Neue News schreiben</a>";
     }
-    echo "<h1>News"; if($is_login) { echo $news_button_url; } echo "</h1>";
+    echo "<h1>News"; if($is_login) { echo $news_button_url; } echo "</h1>\n";
     if($news_nums == 0) {
         echo "Keine News Vorhanden.";
     } else {
@@ -35,7 +35,7 @@ $news_nums = $result->num_rows;
             $query = $mysqli_connect->query($sql);
 
             while($row = mysqli_fetch_object($query)) {
-                echo "<h4><a href='".url()."/?id=".$_GET["id"]."&amp;newsid=".$row->id."'>".$row->title."</a></h4>";
+                echo "<h4><a href='".url()."/?id=".$_GET["id"]."&amp;newsid=".$row->id."'>".$row->title."</a></h4>\n";
                 echo htmlspecialchars_decode($row->content);
             }
 

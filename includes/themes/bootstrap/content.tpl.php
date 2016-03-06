@@ -1,5 +1,6 @@
 ﻿<?php
     echo '<div class="container">';
+    echo "\n";
 	$mysqli_connect = $GLOBALS["mysqli_connect"];
 	$is_login = $GLOBALS["is_login"];
 	$debug = getDebug();
@@ -44,10 +45,11 @@
 				}
 			}
 			else {
-				include ("includes/internal/page.php");
+				include ("includes/themes/bootstrap/page.tpl.php");
 			}
 			break;
 		}
 	}
+    echo "\n";
     echo '</div>';
 ?>

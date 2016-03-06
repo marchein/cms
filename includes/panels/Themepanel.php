@@ -13,7 +13,15 @@ if($isinclude) { // if included don't run this code, if $isinclude is true -> ru
         }
         closedir($handle); // close handle
     }
-
+    foreach($themes as $allthemes) {
+        if($allthemes == "default") {
+            $path = "includes/templates/";
+        } else {
+            $path = "includes/themes/".$allthemes."/";
+        }
+        include($path."theme.config.php");
+    }
+    $themeinfos = $theme;
     if (isset($_POST["action"]) && $_POST["action"] == "write") {
         $selectedtheme = mysqli_real_escape_string($mysqli_connect, $_POST["theme"]); // escape the $_POST
         $query = "UPDATE `config` SET `theme` = '" . $selectedtheme . "' WHERE `ID` = '1'"; // query
@@ -22,10 +30,10 @@ if($isinclude) { // if included don't run this code, if $isinclude is true -> ru
     } else {
         echo'<form method="post" action="?id=0&ap=Theme">
           <input type="hidden" name="action" value="write">
-          Design: <select name="theme">';
+          Theme: <select name="theme">';
             foreach($themes as $theme) { // show all themes in theme folder
                 ($theme == getCurrentTheme()) ? $option = "\n<option selected value=\"".$theme."\">" : $option =  "\n<option value=\"".$theme."\">"; // pre select current theme
-                echo $option.$theme."</option>"; // show options
+                echo $option.$themeinfos[$theme]["name"]." (".$themeinfos[$theme]["version"].") von ".$themeinfos[$theme]["author"]."</option>"; // show options
             }
           echo'</select>
         <br /><br /><input type="submit" value="Absenden">
