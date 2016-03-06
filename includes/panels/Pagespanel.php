@@ -18,9 +18,11 @@ if($isinclude) {
     			if (!$pageincludes) {
     				$pageincludes = "false";
     			}
-    			$query = "INSERT INTO `pages` (name, content,position,include) values('" . $titel . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
+    			$query = "INSERT INTO `pages` (name, content,position,included) values('" . $titel . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
     			$mysqli_connect->query($query);
-    			echo 'Seite erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=Pages">hier</a> um fortzufahren.';
+                var_dump($query);
+                echo "<br /><br /><br />";
+                echo 'Seite erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=Pages">hier</a> um fortzufahren.';
     		} else {
     			echo "<form method='post' name='form2' action='?id=0&ap=Pages&neu=true'>
                 <input type='hidden' name='id' value='0'>
