@@ -11,15 +11,5 @@ if(getLoginsend() == 0) {
         <input type="password" name="pw" id="inputPassword" class="form-control" placeholder="Passwort" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
         </form>';
-    }
-
-    if(getLoginsend() == 1) {
-        echo'Erfolgreich angemeldet! Klicke <a href="?id=0">hier</a> um fortzufahren.';
-    }
-    if(getLoginsend() == 2) {
-        echo'Falscher Benutzername und/oder falsches Passwort! Klicke <a href="?page=Login">hier</a> um\'s erneut zu versuchen.';
-    }
-    if(getLoginsend() == 3) {
-        echo'Erfolgreich abgemeldet! Klicke <a href="?page=Home">hier</a> um fortzufahren.';
-    }
+}
 ?>
