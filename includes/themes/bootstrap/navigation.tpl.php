@@ -20,13 +20,14 @@ echo '
 
     while($result = mysqli_fetch_object($query)) {
         ($result->id == $_GET["id"]) ? $active = ' class="active"' : $active = "";
-        echo '<li'.$active.'><a href="'.url().'/?id='.$result->id.'">'.$result->name.'</a></li>';
-        echo "\n";
+        echo '<li'.$active.'><a href="'.url().'/?id='.$result->id.'">'.$result->name.'</a></li>
+        ';
     }
     $sql = "SELECT id FROM `pages` WHERE `name` LIKE 'Admin'";
     $result = $GLOBALS["mysqli_connect"]->query($sql);
     $adminid = (mysqli_fetch_object($result)->id);
-    echo'</ul>';
+    echo'</ul>
+    ';
     if($is_login == 1) {
         echo'<ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -42,7 +43,7 @@ echo '
         <a href="'.url().'/?id='.$adminid.'" class="btn btn-social btn-twitter">Anmelden</a>
         </p>';
     }
-        echo'</div><!--/.nav-collapse -->
+        echo '</div>
         </div>
       </nav>';
 

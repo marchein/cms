@@ -23,7 +23,7 @@ if($isinclude) {
                 $query = "SELECT * FROM `user`";
                 $result = $mysqli_connect->query($query);
                 // if($debug) { var_dump($result); }
-                echo "<table>
+                echo "<table class='table'>
                 <tr>
                     <th>Name</th>
                     <th>Rechte</th>
