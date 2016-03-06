@@ -83,6 +83,20 @@ function getPageName() {
     return $config->name;
 }
 
+function getCurrentPageName($id, $newsid) {
+    $query = 'SELECT name FROM `pages` WHERE `ID` = ' . (int)$id;
+    $result = $GLOBALS["mysqli_connect"]->query($query);
+    $row = $result->fetch_object();
+    if($id == 2 && isset($newsid)) {
+        $query = 'SELECT title FROM `news` WHERE `id` = ' . (int)$newsid;
+        $result = $GLOBALS["mysqli_connect"]->query($query);
+        $newstitle = $result->fetch_object()->title;
+        return $newstitle." - ".$row->name." | " . getPageName();
+    } else {
+        return $row->name." | " . getPageName();
+    }
+}
+
 function getRechteName($rechte) {
     if($rechte == 0) { $rechtename = "Gesperrt"; }
     if($rechte == 1) { $rechtename = "Administrator"; }
