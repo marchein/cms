@@ -43,7 +43,7 @@
 				}
 			}
 			else {
-				include ("includes/internal/templates/page.tpl.php");
+				include ("includes/templates/page.tpl.php");
 			}
 			break;
 		}
