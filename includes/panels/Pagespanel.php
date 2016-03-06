@@ -20,7 +20,6 @@ if($isinclude) {
     			}
     			$query = "INSERT INTO `pages` (name, content,position,included) values('" . $titel . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
     			$mysqli_connect->query($query);
-                var_dump($query);
                 echo "<br /><br /><br />";
                 echo 'Seite erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=Pages">hier</a> um fortzufahren.';
     		} else {
@@ -122,14 +121,16 @@ if($isinclude) {
     			$row = mysqli_fetch_object($result);
                 if($debug) { var_dump($row); }
     			if (@$_POST["action"] == "update") {
-    				$pagecontent = mysqli_real_escape_string($mysqli_connect, $_POST['pagecontent']);
-    				$pagetitle = mysqli_real_escape_string($mysqli_connect, $_POST['titel']);
-    				@$pageincludes = mysqli_real_escape_string($mysqli_connect, $_POST['include']);
-    				if (!$pageincludes) {
-    					$pageincludes = "false";
-    				}
-    				$updatesql = "UPDATE `pages` SET `content` = '" . $pagecontent . "', `name` = '" . $pagetitle . "', `include` = '" . $pageincludes . "' WHERE `ID` = " . $pageid . ";";
-    				$mysqli_connect->query($updatesql);
+    				$pagecontent = $mysqli_connect->real_escape_string($_POST['pagecontent']);
+    				$pagetitle = $mysqli_connect->real_escape_string($_POST['titel']);
+                    if(!isset($_POST['include'])) {
+                        $pageincludes = 0;
+                    } else {
+    				    @$pageincludes = $mysqli_connect->real_escape_string($_POST['include']);
+                    }
+                    $updatesql = "UPDATE `pages` SET `content` = '" . $pagecontent . "', `name` = '" . $pagetitle . "', `included` = '" . $pageincludes . "' WHERE `ID` = " . $pageid . ";";
+                    echo $updatesql;
+                    $mysqli_connect->query($updatesql);
                     if($debug) { var_dump($updatesql); }
     				echo 'Seite erfolgreich bearbeitet! Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
     			} elseif(@$_GET["action"] == "delete") {
@@ -144,8 +145,8 @@ if($isinclude) {
                     <input type='hidden' name='pageid' value='" . $pageid . "'>
                     <input type='hidden' name='action' value='update'>
                     Titel:<br /><input name='titel' value='" . $row->name . "' size='20'><br />
-                    Seite aus /includes/: <input type='checkbox' name='include' value='true'";
-                    if ($row->included == "true") {
+                    Seite aus /includes/: <input type='checkbox' name='include' value='1'";
+                    if ($row->included == "1") {
                         echo " checked";
                     }
                     echo "><br />
