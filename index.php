@@ -16,6 +16,7 @@ echo"\n<body>\n";
 getNavigation();
 getContent();
 echo "\n</body>\n";
+getLoggedIn(); 
 include($path.'/footer.tpl.php');
 
 ?>
