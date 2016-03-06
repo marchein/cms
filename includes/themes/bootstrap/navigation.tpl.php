@@ -26,14 +26,26 @@ echo '
     $sql = "SELECT id FROM `pages` WHERE `name` LIKE 'Admin'";
     $result = $GLOBALS["mysqli_connect"]->query($sql);
     $adminid = (mysqli_fetch_object($result)->id);
-    echo'</ul>
-        <p class="navbar-btn">
-        <a href="'.url().'/?id='.$adminid.'" class="pull-right navbar-right btn btn-social btn-twitter"><i class="fa fa-lock"></i> Anmelden</a>
-        </p>
-        </div><!--/.nav-collapse -->
+    echo'</ul>';
+    if($is_login == 1) {
+        echo'<ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menü <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="'.url().'/?id=0">Admin Panel</a></li>
+                    <li><a href="'.url().'/?id=0&amp;log_out=true">Abmelden</a></li>
+                </ul>
+              </li>
+            </ul>';
+    } else {
+        echo'<p class="navbar-btn pull-right navbar-right">
+        <a href="'.url().'/?id='.$adminid.'" class="btn btn-social btn-twitter">Anmelden</a>
+        </p>';
+    }
+        echo'</div><!--/.nav-collapse -->
         </div>
       </nav>';
-    
+
 
     if(getDebug()) {
         if($is_login == 1) {
