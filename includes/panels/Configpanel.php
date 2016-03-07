@@ -4,10 +4,10 @@ $panelnames[$panelname] = "Konfiguration";
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_POST["action"]) && $_POST["action"] == "write") {
-        $name = mysqli_real_escape_string($mysqli, $_POST["name"]);
-        $mail = mysqli_real_escape_string($mysqli, $_POST["mail"]);
-        $debugging = mysqli_real_escape_string($mysqli, $_POST["debug"]);
-        $version = mysqli_real_escape_string($mysqli, $_POST["version"]);
+        $name = htmlspecialchars($_POST["name"]);
+        $mail = $mysqli->real_escape_string($_POST["mail"]);
+        $debugging = htmlspecialchars($_POST["debug"]);
+        $version = htmlspecialchars($_POST["version"]);
         $query = "UPDATE `config` SET `name` = '" . $name . "', `mail` = '" . $mail . "', `debug` = " . $debugging . " WHERE `ID` = '1'";
         $mysqli->query($query);
         setVersion($version);
@@ -19,7 +19,7 @@ if($isinclude) {
         echo "<form method='post' action='?id=0&ap=Config'>
         <input type='hidden' name='action' value='write'>
         Name<br />
-        <input name='name' size='30' value='" . $ergebnis->name . "'> <br />
+        <input name='name' size='30' value='" . ($ergebnis->name) . "'> <br />
         Admin E-Mail<br />
         <input name='mail' size='30' value='" . $ergebnis->mail . "'> <br />
         CMS Version:<br />
