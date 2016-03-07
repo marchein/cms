@@ -1,9 +1,9 @@
 <?php
 $sql = "SELECT * FROM `news`";
-$result = $mysqli_connect->query($sql);
+$result = $mysqli->query($sql);
 $news_nums = $result->num_rows;
     if(isset($_GET['newsid'])) {
-        $newsid = mysqli_real_escape_string($mysqli_connect, $_GET['newsid']);
+        $newsid = mysqli_real_escape_string($mysqli, $_GET['newsid']);
         $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;newsid=".$newsid."'>Bearbeiten</a>";
     } else {
         $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;neu=true'>Neue News schreiben</a>";
@@ -14,7 +14,7 @@ $news_nums = $result->num_rows;
     } else {
         if (isset($_GET['newsid'])) {
             $query = "SELECT * FROM news WHERE `id` = " . $newsid;
-            $result = $mysqli_connect->query($query);
+            $result = $mysqli->query($query);
             if (mysqli_num_rows($result) == 0) {
                 echo "Fehler!";
             } else {
@@ -26,13 +26,13 @@ $news_nums = $result->num_rows;
             if(!isset($_GET["offset"])) {
                 $offset = 0;
             } else {
-                $offset = mysqli_real_escape_string($mysqli_connect, $_GET["offset"]);
+                $offset = mysqli_real_escape_string($mysqli, $_GET["offset"]);
             }
 
             $limit = 5;
 
             $sql = "SELECT * FROM `news` ORDER BY `id` DESC LIMIT ".$offset.", ".$limit."";
-            $query = $mysqli_connect->query($sql);
+            $query = $mysqli->query($sql);
 
             while($row = mysqli_fetch_object($query)) {
                 echo "<h4><a href='".url()."/?id=".$_GET["id"]."&amp;newsid=".$row->id."'>".$row->title."</a></h4>\n";
@@ -43,7 +43,7 @@ $news_nums = $result->num_rows;
             $next_offset = $offset + $limit;
 
             $all = "SELECT * FROM `news`";
-            $all_query = $mysqli_connect->query($all);
+            $all_query = $mysqli->query($all);
 
             echo "<br />";
             if($offset >= $limit) {

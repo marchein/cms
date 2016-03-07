@@ -1,5 +1,6 @@
 ﻿<?php
-$panelnames["Theme"] = "Design"; // set panel name
+$panelname = "Theme";
+$panelnames[$panelname] = "Design"; // set panel name
 if(!isset($isinclude)) { $isinclude = true; } // if unset, set it to true
 
 if($isinclude) { // if included don't run this code, if $isinclude is true -> run code
@@ -23,9 +24,9 @@ if($isinclude) { // if included don't run this code, if $isinclude is true -> ru
     }
     $themeinfos = $theme;
     if (isset($_POST["action"]) && $_POST["action"] == "write") {
-        $selectedtheme = mysqli_real_escape_string($mysqli_connect, $_POST["theme"]); // escape the $_POST
+        $selectedtheme = mysqli_real_escape_string($mysqli, $_POST["theme"]); // escape the $_POST
         $query = "UPDATE `config` SET `theme` = '" . $selectedtheme . "' WHERE `ID` = '1'"; // query
-        $mysqli_connect->query($query);
+        $mysqli->query($query);
         echo '<br />Design ge&auml;ndert. Klicke <a href="?id=0">hier</a> um fortzufahren.';
     } else {
         echo'<form method="post" action="?id=0&ap=Theme">

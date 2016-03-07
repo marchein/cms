@@ -1,15 +1,15 @@
 ﻿<?php
     echo '<div class="container">';
     echo "\n";
-	$mysqli_connect = $GLOBALS["mysqli_connect"];
+	$mysqli = $GLOBALS["mysqli"];
 	$is_login = $GLOBALS["is_login"];
 	$debug = getDebug();
-	@ $id = mysqli_real_escape_string($mysqli_connect, $_GET["id"]);
+	@ $id = mysqli_real_escape_string($mysqli, $_GET["id"]);
 	if ($id == "") {
 		$id = 1;
 	}
 	$query = "SELECT id, name, included FROM pages WHERE `id` = '" . $id . "' LIMIT 0, 1";
-	$result = $mysqli_connect->query($query);
+	$result = $mysqli->query($query);
 	if (mysqli_num_rows($result) == 0) {
 		$error = "page";
 		include ("includes/internal/error.php");
@@ -17,7 +17,7 @@
 	else {
 		if ($debug) {
 			$query = "SELECT name FROM pages WHERE `id` = '" . $id . "'";
-			$name_result = $mysqli_connect->query($query);
+			$name_result = $mysqli->query($query);
 			$page = mysqli_fetch_object($name_result);
 			$page = $page->name;
 		}

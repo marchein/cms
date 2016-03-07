@@ -15,7 +15,7 @@ function getRechte($user) {
 session_start();
 if(isset($_POST['login']))  {
     $query   = "SELECT name, password FROM `user` WHERE name ='" . $_POST['login'] . "'";
-    $result = $mysqli_connect->query($query);
+    $result = $mysqli->query($query);
     $data = mysqli_fetch_object($result);
     @$login = $data->name;
     @$pw    = $data->password;

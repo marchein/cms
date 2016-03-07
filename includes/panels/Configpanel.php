@@ -1,20 +1,20 @@
 ﻿<?php
-
-$panelnames["Config"] = "Konfiguration";
+$panelname = "Config";
+$panelnames[$panelname] = "Konfiguration";
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_POST["action"]) && $_POST["action"] == "write") {
-        $name = mysqli_real_escape_string($mysqli_connect, $_POST["name"]);
-        $mail = mysqli_real_escape_string($mysqli_connect, $_POST["mail"]);
-        $debugging = mysqli_real_escape_string($mysqli_connect, $_POST["debug"]);
-        $version = mysqli_real_escape_string($mysqli_connect, $_POST["version"]);
+        $name = mysqli_real_escape_string($mysqli, $_POST["name"]);
+        $mail = mysqli_real_escape_string($mysqli, $_POST["mail"]);
+        $debugging = mysqli_real_escape_string($mysqli, $_POST["debug"]);
+        $version = mysqli_real_escape_string($mysqli, $_POST["version"]);
         $query = "UPDATE `config` SET `name` = '" . $name . "', `mail` = '" . $mail . "', `debug` = " . $debugging . " WHERE `ID` = '1'";
-        $mysqli_connect->query($query);
+        $mysqli->query($query);
         setVersion($version);
         echo '<br />Seiten Daten ge&auml;ndert';
     } else {
         $query = "SELECT * FROM `config` WHERE `id` = 1";
-        $result = $mysqli_connect->query($query);
+        $result = $mysqli->query($query);
         $ergebnis = mysqli_fetch_object($result);
         echo "<form method='post' action='?id=0&ap=Config'>
         <input type='hidden' name='action' value='write'>

@@ -1,16 +1,16 @@
 ﻿<?php
-
-$panelnames["User"] = "Nutzer Verwaltung";
+$panelname = "User";
+$panelnames[$panelname] = "Nutzer Verwaltung";
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if(isset($_GET["userlist"]) && $_GET["userlist"]) {
         if(isset($_GET["userid"])) {
-            $userid = $mysqli_connect->real_escape_string($_GET["userid"]);
+            $userid = $mysqli->real_escape_string($_GET["userid"]);
         }
         if($rechte == 1) {
             if(isset($userid)) {
                 $query = "SELECT * FROM `user` WHERE `id` = ".$userid;
-                $result = $mysqli_connect->query($query);
+                $result = $mysqli->query($query);
                 $user = mysqli_fetch_object($result);
                 $fullname = $user->full_name;
                 if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
@@ -21,7 +21,7 @@ if($isinclude) {
                 Rechte: " . getRechteName($user->rechte) . "<br />";
             } else {
                 $query = "SELECT * FROM `user`";
-                $result = $mysqli_connect->query($query);
+                $result = $mysqli->query($query);
                 // if($debug) { var_dump($result); }
                 echo "<table class='table'>
                 <tr>

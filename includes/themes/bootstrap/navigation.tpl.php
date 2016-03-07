@@ -16,7 +16,7 @@ echo '
           <ul class="nav navbar-nav">';
           echo "\n";
 
-    $query = $GLOBALS["mysqli_connect"]->query("SELECT id, name FROM `pages` WHERE `id` <> 0 ORDER BY `pages`.`position` ASC");
+    $query = $GLOBALS["mysqli"]->query("SELECT id, name FROM `pages` WHERE `id` <> 0 ORDER BY `pages`.`position` ASC");
 
     while($result = mysqli_fetch_object($query)) {
         ($result->id == $_GET["id"]) ? $active = ' class="active"' : $active = "";
@@ -24,7 +24,7 @@ echo '
         ';
     }
     $sql = "SELECT id FROM `pages` WHERE `name` LIKE 'Admin'";
-    $result = $GLOBALS["mysqli_connect"]->query($sql);
+    $result = $GLOBALS["mysqli"]->query($sql);
     $adminid = (mysqli_fetch_object($result)->id);
     echo'</ul>
     ';

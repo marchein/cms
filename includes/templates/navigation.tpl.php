@@ -1,7 +1,7 @@
 ﻿<?php
 $is_login = $GLOBALS["is_login"];
 
-$query = $GLOBALS["mysqli_connect"]->query("SELECT id, name FROM `pages` ORDER BY `pages`.`position` ASC");
+$query = $GLOBALS["mysqli"]->query("SELECT id, name FROM `pages` ORDER BY `pages`.`position` ASC");
     $i = 0;
 
     while($result = mysqli_fetch_object($query)) {

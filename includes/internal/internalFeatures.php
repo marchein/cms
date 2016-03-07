@@ -6,13 +6,13 @@ function getHash($hash){
 
 function getHeaders() {
     if (@$_GET["id"] == "0" && getLoginsend() == 1) {
-        header("refresh:2;url=http://localhost/HeinCMS/?id=0");
+        header("refresh:2;url=".url()."?id=0");
     }
     elseif (@$_GET["id"] == "0" && getLoginsend() == 2) {
-        header("refresh:2;url=http://localhost/HeinCMS/?id=0");
+        header("refresh:2;url=".url()."?id=0");
     }
     elseif (@$_GET["id"] == "0" && getLoginsend() == 3) {
-        header("refresh:2;url=http://localhost/HeinCMS/");
+        header("refresh:2;url=".url());
     } else {
         header('Content-type: text/html; charset=utf-8');
     }
@@ -28,7 +28,7 @@ function getLoggedIn() {
 
 function getCurrentTheme() {
     $sql = "SELECT theme FROM config"; // fetch current theme
-    return mysqli_fetch_object($GLOBALS["mysqli_connect"]->query($sql))->theme; // return current theme
+    return mysqli_fetch_object($GLOBALS["mysqli"]->query($sql))->theme; // return current theme
 }
 
 function getNavigation() {

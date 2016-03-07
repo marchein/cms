@@ -1,5 +1,5 @@
 ﻿<?php
-$query = $mysqli_connect->query("SELECT * FROM `pages` WHERE `id` =  ".$id."");
+$query = $mysqli->query("SELECT * FROM `pages` WHERE `id` =  ".$id."");
 
 $content = mysqli_fetch_object($query);
 

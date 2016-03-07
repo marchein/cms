@@ -1,5 +1,6 @@
 ﻿<?php
-$panelnames["Pages"] = "Seiten Verwaltung";
+$panelname = "Pages";
+$panelnames[$panelname] = "Seiten Verwaltung";
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset ($_GET["neu"])) {
@@ -11,15 +12,15 @@ if($isinclude) {
     			$content = $_POST['pagecontent'];
     			$content = htmlspecialchars($content);
     			$query = "SELECT MAX(position) FROM `pages` WHERE `position` >= 0 AND `position` < 99";
-    			$result = $mysqli_connect->query($query);
+    			$result = $mysqli->query($query);
     			$position = mysqli_fetch_array($result);
     			$position = $position['MAX(position)'];
-    			$pageincludes = mysqli_real_escape_string($mysqli_connect, $_POST['include']);
+    			$pageincludes = mysqli_real_escape_string($mysqli, $_POST['include']);
     			if (!$pageincludes) {
     				$pageincludes = "false";
     			}
     			$query = "INSERT INTO `pages` (name, content,position,included) values('" . $titel . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
-    			$mysqli_connect->query($query);
+    			$mysqli->query($query);
                 echo "<br /><br /><br />";
                 echo 'Seite erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=Pages">hier</a> um fortzufahren.';
     		} else {
@@ -43,7 +44,7 @@ if($isinclude) {
     	if ($rechte == "1") {
     	    if(!isset($_GET["page"])) {
                 $query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` ASC";
-        		$result = $mysqli_connect->query($query);
+        		$result = $mysqli->query($query);
                 // if($debug) { var_dump($result); }
         		while ($row = mysqli_fetch_object($result)) {
         		    // if($debug) { var_dump($row); }
@@ -52,10 +53,10 @@ if($isinclude) {
         			echo "<a href='?id=0&amp;ap=Pages&amp;delete=true&amp;page=".$id."'>".$titel."</a><br />\n";
         		}
             } else {
-                $pageid = $mysqli_connect->real_escape_string($_GET["page"]);
+                $pageid = $mysqli->real_escape_string($_GET["page"]);
 
                 $query = "SELECT * FROM `pages` WHERE `id` = ".$pageid;
-        		$result = $mysqli_connect->query($query);
+        		$result = $mysqli->query($query);
                 $row = mysqli_fetch_object($result);
 
                 echo "ID der Seite: ". $row->id ." <br /> \n
@@ -73,7 +74,7 @@ if($isinclude) {
     	echo "Reihenfolge<br />";
     	if (!isset ($_POST['update'])) {
     		$query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` ASC";
-    		$result = $mysqli_connect->query($query);
+    		$result = $mysqli->query($query);
             // if($debug) { var_dump($result); }
     		echo "<form method='post'>
             <input type='hidden' name='id' value='0'>
@@ -91,51 +92,49 @@ if($isinclude) {
     		echo "<input type='submit' value='Absenden'>";
     	} else {
     		$query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99";
-    		$result = $mysqli_connect->query($query);
+    		$result = $mysqli->query($query);
     		$i = 1;
     		while ($row = mysqli_fetch_object($result)) {
     			$id = $row->id;
     			$position = $row->position;
-                $pageposition = mysqli_real_escape_string($mysqli_connect, $_POST['position'][$i]) ;
+                $pageposition = mysqli_real_escape_string($mysqli, $_POST['position'][$i]) ;
     			if ($pageposition < 99 && $pageposition > 0 && $id != 0) {
     				$updatesql = "UPDATE `pages` SET `position` = '" . $pageposition . "' WHERE `id` = " . $id . "";
-    				$mysqli_connect->query($updatesql);
+    				$mysqli->query($updatesql);
+                    $message = "Reihenfolge erfolgreich bearbeitet!";
     			} else {
-    				var_dump($pageposition);
-    				echo "<br />" . $id;
-    				echo "<br />Fehler: Position muss zwischen 1-98 liegen!";
+    				$message = "Fehler: Position muss zwischen 1-98 liegen!";
     			}
     			$i++;
     		}
-    		echo '<br />Reihenfolge erfolgreich bearbeitet!
+    		echo '<br />'.$message.'<br />
             Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
     	}
     } else {
     	if (isset ($_GET['pageid'])) {
-    		$pageid = mysqli_real_escape_string($mysqli_connect, $_GET['pageid']);
+    		$pageid = mysqli_real_escape_string($mysqli, $_GET['pageid']);
     		$query = "SELECT * FROM pages WHERE `position` >= 0 AND `position` < 99 AND `id` = " . $pageid;
-    		$result = $mysqli_connect->query($query);
+    		$result = $mysqli->query($query);
     		if (mysqli_num_rows($result) == 0) {
     			echo "Fehler!";
     		} else {
     			$row = mysqli_fetch_object($result);
                 if($debug) { var_dump($row); }
     			if (@$_POST["action"] == "update") {
-    				$pagecontent = $mysqli_connect->real_escape_string($_POST['pagecontent']);
-    				$pagetitle = $mysqli_connect->real_escape_string($_POST['titel']);
+    				$pagecontent = $mysqli->real_escape_string($_POST['pagecontent']);
+    				$pagetitle = $mysqli->real_escape_string($_POST['titel']);
                     if(!isset($_POST['include'])) {
                         $pageincludes = 0;
                     } else {
-    				    @$pageincludes = $mysqli_connect->real_escape_string($_POST['include']);
+    				    @$pageincludes = $mysqli->real_escape_string($_POST['include']);
                     }
                     $updatesql = "UPDATE `pages` SET `content` = '" . $pagecontent . "', `name` = '" . $pagetitle . "', `included` = '" . $pageincludes . "' WHERE `ID` = " . $pageid . ";";
-                    echo $updatesql;
-                    $mysqli_connect->query($updatesql);
+                    $mysqli->query($updatesql);
                     if($debug) { var_dump($updatesql); }
     				echo 'Seite erfolgreich bearbeitet! Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
     			} elseif(@$_GET["action"] == "delete") {
                     $updatesql = "delete from `pages` WHERE `ID` = " . $pageid . " limit 1;";
-    				$mysqli_connect->query($updatesql);
+    				$mysqli->query($updatesql);
     				echo 'Seite erfolgreich gelöscht! Klicke <a href="?id=0&ap=Pages">hier</a> um fortzufahren.';
 
                 } else {
@@ -162,10 +161,10 @@ if($isinclude) {
     			echo '<a href="?id=0&ap=Pages&reihenfolge=true">Reihenfolge der Seiten ändern</a>';
     		}
     		$query = "SELECT * FROM `pages`";
-    		$num_res = $mysqli_connect->query($query);
+    		$num_res = $mysqli->query($query);
     		$numrows = mysqli_num_rows($num_res);
     		$query = "SELECT id, name, date_created FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` DESC";
-    		$result = $mysqli_connect->query($query);
+    		$result = $mysqli->query($query);
     		$i = 0;
     		while ($row = mysqli_fetch_object($result)) {
     			$titel = $row->name;

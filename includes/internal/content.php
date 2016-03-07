@@ -1,21 +1,21 @@
 <?php
-$mysqli_connect = $GLOBALS["mysqli_connect"];
+$mysqli = $GLOBALS["mysqli"];
 $is_login = $GLOBALS["is_login"];
 $debug = getDebug();
 
 
-@$id = mysqli_real_escape_string($mysqli_connect,$_GET["id"]);
+@$id = mysqli_real_escape_string($mysqli,$_GET["id"]);
 
     if($id == "") { $id = 1; }
     $query = "SELECT id, name, include FROM pages WHERE `id` = '". $id ."'";
-    $result = $mysqli_connect->query($query);
+    $result = $mysqli->query($query);
     if(mysqli_num_rows($result) == 0) {
         $error = "page";
         include("includes/internal/error.php");
     } else {
         if($debug){
             $query = "SELECT name FROM pages WHERE `id` = '". $id ."'";
-            $name_result = $mysqli_connect->query($query);
+            $name_result = $mysqli->query($query);
             $page = mysqli_fetch_object($name_result);
             $page = $page->name;
         }
@@ -42,7 +42,7 @@ $debug = getDebug();
     if($debug) {
         echo "<br /><br />";
         var_dump($_SESSION);
-        echo '<br /><br />Das CMS l‰uft in: '. url() . '<br />
+        echo '<br /><br />Das CMS l√§uft in: '. url() . '<br />
         CMS root: '. $localurl . '<br />
         Auf Version: '.getVersion() . ' '.getVersionName() . ' (Build: '.getBuild().')<br />
         <br /> Seite: '.$page.'';

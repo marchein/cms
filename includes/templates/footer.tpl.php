@@ -7,5 +7,5 @@ if(!empty($theme[$theme["default"]["url"]]["js"])) {
 }
 echo "</html>";
 echo "\n<!-- HeinCMS - Version: ".getVersion()." ".getVersionName()." -->";
-$mysqli_connect->close();
+$mysqli->close();
 ?>

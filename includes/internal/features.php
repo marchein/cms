@@ -20,14 +20,14 @@ function mysqlDate($date) {
 
 function getDebug() {
   $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $result = $GLOBALS["mysqli"]->query($query);
   $config = mysqli_fetch_object($result);
   return $config->debug;
 }
 
 function getVersion() {
   $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $result = $GLOBALS["mysqli"]->query($query);
   $config = mysqli_fetch_object($result);
   $version = $config->version;
   return $version;
@@ -48,13 +48,13 @@ function getVersionName() {
 }
 
 function setVersion($version) {
-  $query = "UPDATE `config` SET `version` = '" . mysqli_real_escape_string($GLOBALS["mysqli_connect"], $version) . "' WHERE `config`.`id` = 1;";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $query = "UPDATE `config` SET `version` = '" . mysqli_real_escape_string($GLOBALS["mysqli"], $version) . "' WHERE `config`.`id` = 1;";
+  $result = $GLOBALS["mysqli"]->query($query);
 }
 
 function getBuild() {
   $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $result = $GLOBALS["mysqli"]->query($query);
   $config = mysqli_fetch_object($result);
   return $config->build;
 }
@@ -66,30 +66,30 @@ function setBuild() {
   }
   $build++;
   $query = "UPDATE `config` SET `build` = '" . $build . "' WHERE `config`.`id` = 1;";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $result = $GLOBALS["mysqli"]->query($query);
 }
 
 function showAdmin() {
   $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli_connect"]->query($query);
+  $result = $GLOBALS["mysqli"]->query($query);
   $config = mysqli_fetch_object($result);
   return $config->show_admin;
 }
 
 function getPageName() {
 	$query = "SELECT * FROM `config` WHERE `id` = 1";
-	$result = $GLOBALS["mysqli_connect"]->query($query);
+	$result = $GLOBALS["mysqli"]->query($query);
 	$config = mysqli_fetch_object($result);
     return $config->name;
 }
 
 function getCurrentPageName($id, $newsid) {
     $query = 'SELECT name FROM `pages` WHERE `ID` = ' . (int)$id;
-    $result = $GLOBALS["mysqli_connect"]->query($query);
+    $result = $GLOBALS["mysqli"]->query($query);
     $row = $result->fetch_object();
     if($id == 2 && isset($newsid)) {
         $query = 'SELECT title FROM `news` WHERE `id` = ' . (int)$newsid;
-        $result = $GLOBALS["mysqli_connect"]->query($query);
+        $result = $GLOBALS["mysqli"]->query($query);
         $newstitle = $result->fetch_object()->title;
         return $newstitle." - ".$row->name." | " . getPageName();
     } else {
