@@ -40,14 +40,16 @@ function getNavigation() {
 
 function getContent() {
   include ($GLOBALS["path"]."/content.tpl.php");
-  echo "\n";
-  if ($debug) {
-    echo "<br /><br />";
-    var_dump($_SESSION);
-    echo '<br /><br />Das CMS läuft in: ' . url() . '<br />
+}
+
+function getDebugFooter() {
+    if (getDebug()) {
+    echo "<br /><pre>";
+    print_r($_SESSION);
+    echo '</pre><br />Das CMS läuft in: ' . url() . '<br />
         CMS root: ' . document() . '<br />
         Auf Version: ' . getVersion() . ' ' . getVersionName() . ' (Build: ' . getBuild() . ')<br />
-        <br /> Seite: ' . $page . '';
+        <br /> Seite: ' . $GLOBALS["page"] . '';
   }
 }
 ?>
