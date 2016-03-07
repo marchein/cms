@@ -6,7 +6,6 @@ if($isinclude) {
     if (isset($_GET["neu"])) {
     	if ($rechte == "1") {
     		if (@ $_POST["action"] == "write") {
-    		    echo "<pre>";print_r($_POST);echo"</pre>";
     			$titel = htmlspecialchars($_POST['titel']);
     			$content = htmlspecialchars($_POST['newscontent']);
     			$query = "INSERT INTO `news` (`id`, `date_created`, `author`, `title`, `content`) VALUES(NULL, CURRENT_TIMESTAMP, '" . $username . "', '" . $titel . "','" . $content . "');";
