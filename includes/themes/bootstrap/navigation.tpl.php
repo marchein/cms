@@ -46,13 +46,4 @@ echo '
         echo '</div>
         </div>
       </nav>';
-
-
-    if(getDebug()) {
-        if($is_login == 1) {
-            echo "<br />Eingeloggt.";
-        } else {
-            echo "<br />Nicht eingeloggt.";
-        }
-    }
     ?>

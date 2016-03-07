@@ -20,6 +20,7 @@
 			$name_result = $mysqli->query($query);
 			$page = mysqli_fetch_object($name_result);
 			$page = $page->name;
+            $GLOBALS["page"] = $page;
 		}
 		while ($row = mysqli_fetch_object($result)) {
 			if ($debug) {
@@ -50,6 +51,7 @@
 			break;
 		}
 	}
+    getDebugFooter();
     echo "\n";
     echo '</div>';
 ?>
