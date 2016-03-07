@@ -137,35 +137,34 @@ if(!isset($_GET["id"]))
 
 function getJS() {
     foreach(glob("js/*.js") as $js) { // local js
-        echo '<script src="'.$js.'"></script>';
+        echo '
+    <script src="'.$js.'"></script>';
     }
     foreach(glob($GLOBALS["path"]."/*.js") as $js) { // local theme js
-        echo "\n";
-        echo '<script src="'.$js.'"></script>';
+        echo '
+    <script src="'.$js.'"></script>';
     }
-    echo "\n";
     if(!empty($theme[getCurrentTheme()]["js"])) {
         foreach($theme[getCurrentTheme()]["js"] as $js) { // remote js
-            echo "\n";
-            echo '<script src="'.$js.'"></script>';
+            echo '
+        <script src="'.$js.'"></script>';
         }
-        echo "\n";
     }
     getLoggedIn();
+    echo "\n";
 }
 
 function getCSS() {
-    echo "\n";
     foreach(glob($GLOBALS["path"]."/*.css") as $css) { // local css
-        echo '<link rel="stylesheet" href="'.$css.'">';
-        echo "\n";
+        echo '
+    <link rel="stylesheet" href="'.$css.'">';
     }
     if(!empty($theme[getCurrentTheme()]["url"]["css"])) {
         foreach($theme[getCurrentTheme()]["url"]["css"] as $css) { // remote css
-            echo "\n";
-            echo '<link rel="stylesheet" href="'.$css.'">';
+            echo '
+        <link rel="stylesheet" href="'.$css.'">';
         }
-        echo "\n";
     }
+    echo "\n";
 }
 ?>
