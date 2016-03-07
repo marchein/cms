@@ -140,7 +140,7 @@ function getJS() {
         echo '
     <script src="'.$js.'"></script>';
     }
-    foreach(glob($GLOBALS["path"]."/*.js") as $js) { // local theme js
+    foreach(glob($GLOBALS["path"]."/js/*.js") as $js) { // local theme js
         echo '
     <script src="'.$js.'"></script>';
     }
@@ -155,7 +155,7 @@ function getJS() {
 }
 
 function getCSS() {
-    foreach(glob($GLOBALS["path"]."/*.css") as $css) { // local css
+    foreach(glob($GLOBALS["path"]."/css/*.css") as $css) { // local css
         echo '
     <link rel="stylesheet" href="'.$css.'">';
     }
