@@ -1,7 +1,7 @@
 ﻿<?php
-$is_login = $GLOBALS["is_login"];
 
-$query = $GLOBALS["mysqli"]->query("SELECT id, name FROM `pages` ORDER BY `pages`.`position` ASC");
+    $is_login = $GLOBALS["is_login"];
+    $query = $GLOBALS["mysqli"]->query("SELECT id, name FROM `pages` ORDER BY `pages`.`position` ASC");
     $i = 0;
 
     while($result = mysqli_fetch_object($query)) {
@@ -17,15 +17,5 @@ $query = $GLOBALS["mysqli"]->query("SELECT id, name FROM `pages` ORDER BY `pages
             $i++;
         }
 
-    }
-
-    echo "\n";
-
-    if(getDebug()) {
-        if($is_login == 1) {
-            echo "<br />Eingeloggt.";
-        } else {
-            echo "<br />Nicht eingeloggt.";
-        }
     }
     ?>

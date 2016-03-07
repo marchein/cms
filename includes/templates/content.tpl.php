@@ -48,4 +48,6 @@
 			break;
 		}
 	}
+
+    getDebugFooter();
 ?>
