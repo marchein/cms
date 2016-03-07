@@ -24,3 +24,7 @@ Great!  [Create an issue](https://github.com/marchein/cms/issues), or, better ye
 - Create, delete and edit user accounts
 - Extend the functionality with plugins (maybe even wordpress plugins)
 - Advanced features with some jquery magic
+
+## Todo
+
+- Improve SHA512 hashing
