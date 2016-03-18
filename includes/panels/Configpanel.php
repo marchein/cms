@@ -1,6 +1,6 @@
 ﻿<?php
 $panelname = "Config";
-$panelnames[$panelname] = "Konfiguration";
+$panelnames[$panelname] = $GLOBALS['lang']['config'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_POST["action"]) && $_POST["action"] == "write") {

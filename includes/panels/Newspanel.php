@@ -1,6 +1,6 @@
 ﻿<?php
 $panelname = "News";
-$panelnames[$panelname] = "News";
+$panelnames[$panelname] = $GLOBALS['lang']['news'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_GET["neu"])) {

@@ -1,6 +1,6 @@
 ﻿<?php
 $panelname = "Pages";
-$panelnames[$panelname] = "Seiten Verwaltung";
+$panelnames[$panelname] = $GLOBALS['lang']['pages'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset ($_GET["neu"])) {

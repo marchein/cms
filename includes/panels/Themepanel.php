@@ -1,6 +1,6 @@
 ﻿<?php
 $panelname = "Theme";
-$panelnames[$panelname] = "Design"; // set panel name
+$panelnames[$panelname] = $GLOBALS['lang']['theme']; // set panel name
 if(!isset($isinclude)) { $isinclude = true; } // if unset, set it to true
 
 if($isinclude) { // if included don't run this code, if $isinclude is true -> run code

@@ -1,6 +1,6 @@
 ﻿<?php
 $panelname = "User";
-$panelnames[$panelname] = "Nutzer Verwaltung";
+$panelnames[$panelname] = $GLOBALS['lang']['user'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if(isset($_GET["userlist"]) && $_GET["userlist"]) {

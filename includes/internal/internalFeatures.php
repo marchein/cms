@@ -46,10 +46,10 @@ function getDebugFooter() {
     if (getDebug()) {
     echo "<br /><pre>";
     print_r($_SESSION);
-    echo '</pre><br />Das CMS läuft in: ' . url() . '<br />
-        CMS root: ' . document() . '<br />
-        Auf Version: ' . getVersion() . ' ' . getVersionName() . ' (Build: ' . getBuild() . ')<br />
-        <br /> Seite: ' . $GLOBALS["page"] . '';
+    echo '</pre><br />'.$GLOBALS['lang']['cmsfolder'].' '. url() . '<br />
+        '.$GLOBALS['lang']['cmsroot'].' '. document() . '<br />
+        '.$GLOBALS['lang']['cmsversion'].' '.getVersion() . ' '.getVersionName() . ' (Build: '.getBuild().')<br />
+        <br /> '.$GLOBALS['lang']['cmspage'].' '.$GLOBALS["page"].'';
   }
 }
 

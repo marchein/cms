@@ -2,13 +2,13 @@
 $username = $_SESSION["username"];
 $rechte = getRechte($username);
 
-echo "<h1>Interner Bereich</h1>\n";
-if(getLoginsend() == 1) {
-        echo'Erfolgreich angemeldet! Klicke <a href="?id=0">hier</a> um fortzufahren.';
+echo "<h1>".$GLOBALS['lang']['intern']."</h1>\n";
+    if(getLoginsend() == 1) {
+        echo $GLOBALS['lang']['loggedin'];
     } else if(getLoginsend() == 2) {
-        echo'Falscher Benutzername und/oder falsches Passwort! Klicke <a href="?id=0">hier</a> um\'s erneut zu versuchen.';
+        echo $GLOBALS['lang']['error_logging_in'];
     } else if(getLoginsend() == 3) {
-        echo'Erfolgreich abgemeldet! Klicke <a href="?id=1">hier</a> um fortzufahren.';
+        echo $GLOBALS['lang']['loggedout'];
     } else {
 
         if ($is_login) {
@@ -30,7 +30,7 @@ if(getLoginsend() == 1) {
                     }
                     closedir($handle);
                 }
-                echo"<br />\n<a href='".url()."/?id=0&amp;log_out=true'>Log out</a>";
+                echo "<br />\n<a href='".url()."/?id=0&amp;log_out=true'>".$GLOBALS["lang"]["logout"]."</a>";
             }
         } else {
             if(@$_GET["sp"]=="lost") {

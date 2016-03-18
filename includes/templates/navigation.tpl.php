@@ -7,7 +7,7 @@
     while($result = mysqli_fetch_object($query)) {
         {
         if($result->id == 0 && $is_login) {
-            echo "<a href='".url()."/?id=0'>".$result->name."</a>";
+            echo "<a href='".url()."/?id=0'>".$GLOBALS["lang"]["admin"]."</a>";
         } elseif($result->id == 0 && !$is_login) {
             echo "<a href='".url()."/?id=0'>".$GLOBALS["lang"]["login"]."</a>";
         } else {
