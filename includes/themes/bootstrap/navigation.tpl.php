@@ -31,16 +31,16 @@ echo '
     if($is_login == 1) {
         echo'<ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menü <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.$GLOBALS['lang']['menu'].' <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="'.url().'/?id=0">Admin Panel</a></li>
-                    <li><a href="'.url().'/?id=0&amp;log_out=true">Abmelden</a></li>
+                    <li><a href="'.url().'/?id=0">'.$GLOBALS['lang']['admin'].'</a></li>
+                    <li><a href="'.url().'/?id=0&amp;log_out=true">'.$GLOBALS['lang']['logout'].'</a></li>
                 </ul>
               </li>
             </ul>';
     } else {
         echo'<p class="navbar-btn pull-right navbar-right">
-        <a href="'.url().'/?id='.$adminid.'" class="btn btn-social btn-twitter">Anmelden</a>
+        <a href="'.url().'/?id='.$adminid.'" class="btn btn-social btn-twitter">'.$GLOBALS['lang']['login'].'</a>
         </p>';
     }
         echo '</div>

@@ -52,4 +52,40 @@ function getDebugFooter() {
         <br /> Seite: ' . $GLOBALS["page"] . '';
   }
 }
+
+function getLanguage() {
+    if(isset($_GET["lang"])) {
+        $lang = $_GET["lang"];
+        // register the session and set the cookie
+        $_SESSION["lang"] = $lang;
+        setcookie('lang', $lang, time() + (3600 * 24 * 30));
+    } else if(isset($_SESSION["lang"])) {
+        $lang = $_SESSION["lang"];
+    } else if(isset($_COOKIE["lang"])) {
+        $lang = $_COOKIE["lang"];
+    } else {
+        $lang = "de";
+    }
+
+    return $lang;
+}
+
+function includeLanguage($lang) {
+    switch($lang) {
+        case "de":
+        $lang_file = "de.lang.php";
+        break;
+        case "en":
+        default:
+        $lang_file = "en.lang.php";
+        break;
+    }
+
+    include_once("includes/languages/".$lang_file);
+    return $language;
+}
+
+$lang = getLanguage();
+$GLOBALS["lang"] = includeLanguage($lang);
+$language = $GLOBALS["lang"];
 ?>

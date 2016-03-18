@@ -9,8 +9,10 @@ mb_internal_encoding('UTF-8');
 ini_set ('display_errors',1);
 error_reporting (E_ALL & ~E_NOTICE);
 
-getHeaders();
+getLanguage();
 
+getHeaders();
+var_dump($language);
 include($path.'/header.tpl.php');
 echo"\n<body>\n";
 getNavigation();

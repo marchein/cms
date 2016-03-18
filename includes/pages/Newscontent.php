@@ -4,9 +4,9 @@ $result = $mysqli->query($sql);
 $news_nums = $result->num_rows;
     if(isset($_GET['newsid'])) {
         $newsid = mysqli_real_escape_string($mysqli, $_GET['newsid']);
-        $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;newsid=".$newsid."'>Bearbeiten</a>";
+        $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;newsid=".$newsid."'>".$GLOBALS["lang"]["edit"]."</a>";
     } else {
-        $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;neu=true'>Neue News schreiben</a>";
+        $news_button_url = " - <a href='".url()."?id=0&amp;ap=News&amp;neu=true'>".$GLOBALS["lang"]["new_news"]."</a>";
     }
     echo "<h1>News"; if($is_login) { echo $news_button_url; } echo "</h1>\n";
     if($news_nums == 0) {

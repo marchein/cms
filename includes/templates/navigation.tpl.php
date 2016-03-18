@@ -9,7 +9,7 @@
         if($result->id == 0 && $is_login) {
             echo "<a href='".url()."/?id=0'>".$result->name."</a>";
         } elseif($result->id == 0 && !$is_login) {
-            echo "<a href='".url()."/?id=0'>Anmelden</a>";
+            echo "<a href='".url()."/?id=0'>".$GLOBALS["lang"]["login"]."</a>";
         } else {
             echo "<a href='".url()."/?id=".$result->id."'>".$result->name."</a>";
         }
