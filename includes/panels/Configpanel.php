@@ -11,7 +11,7 @@ if($isinclude) {
         $query = "UPDATE `config` SET `name` = '" . $name . "', `mail` = '" . $mail . "', `debug` = " . $debugging . " WHERE `ID` = '1'";
         $mysqli->query($query);
         setVersion($version);
-        echo '<br />Seiten Daten ge&auml;ndert';
+        echo '<br />'.$GLOBALS['lang']['page_changed'];
     } else {
         $query = "SELECT * FROM `config` WHERE `id` = 1";
         $result = $mysqli->query($query);
@@ -26,18 +26,18 @@ if($isinclude) {
         <input name='version' size='30' value='" . $ergebnis->version . "'> <br />
         Debug:<br /><select name='debug'>";
         if ($ergebnis->debug) {
-            echo '<option value="true" selected>Aktiviert</option>';
+            echo '<option value="true" selected>'.$GLOBALS['lang']['activated'].'</option>';
         } else {
-            echo '<option value="true">Aktivieren?</option>';
+            echo '<option value="true">'.$GLOBALS['lang']['activate'].'</option>';
         }
         if (!$ergebnis->debug) {
-            echo '<option value="false" selected>Deaktiviert</option>';
+            echo '<option value="false" selected>'.$GLOBALS['lang']['deactivated'].'</option>';
         } else {
-            echo '<option value="false">Deaktivieren?</option>';
+            echo '<option value="false">'.$GLOBALS['lang']['deactivate'].'</option>';
         }
         echo "</select>";
 
-        echo"<br /><br /><input type='submit' value='Absenden'>";
+        echo"<br /><br /><input type='submit' value='".$GLOBALS["lang"]["submit"]."'>";
     }
 }
 ?>

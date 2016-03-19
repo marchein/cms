@@ -6,9 +6,8 @@ if($isinclude) {
     if (isset ($_GET["neu"])) {
     	if ($rechte == "1") {
     		if (@ $_POST["action"] == "write") {
-    			$titel = $_POST['titel'];
-    			$titel = htmlspecialchars($titel);
-    			$autor = $_POST['user'];
+    			$title = $_POST['titel'];
+    			$title = htmlspecialchars($title);
     			$content = $_POST['pagecontent'];
     			$content = htmlspecialchars($content);
     			$query = "SELECT MAX(position) FROM `pages` WHERE `position` >= 0 AND `position` < 99";
@@ -19,38 +18,33 @@ if($isinclude) {
     			if (!$pageincludes) {
     				$pageincludes = "false";
     			}
-    			$query = "INSERT INTO `pages` (name, content,position,included) values('" . $titel . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
+    			$query = "INSERT INTO `pages` (name, content,position,included) values('" . $title . "','" . $content . "', '" . ($position + 1) . "', '" . $pageincludes . "')";
     			$mysqli->query($query);
                 echo "<br /><br /><br />";
-                echo 'Seite erfolgreich angelegt<br />Klicke <a href="?id=0&amp;ap=Pages">hier</a> um fortzufahren.';
+                echo $GLOBALS['lang']['page_created'];
     		} else {
     			echo "<form method='post' name='form2' action='?id=0&ap=Pages&neu=true'>
                 <input type='hidden' name='id' value='0'>
                 <input type='hidden' name='ap' value='Pages'>
                 <input type='hidden' name='action' value='write'>
-                Username:<br />
-                <input name='user' size='20' value='" . $username . "' readonly>
-                <br />
-                Titel:<br /><input name='titel' size='20'><br />
-                Seite aus /includes/: <input type='checkbox' name='include' value='true'> (Wenn dieses Feld ausgewählt wurde, muss die Datei im /includes/pages/ mit dem Dateinamen \"&#60;Seitentitel&#62;content.php\" liegen. Außerdem wird der Inhalt im Feld \"Seiteninhalt\" ignoriert.<br />
-                Seiteninhalt:<br />
+                ".$GLOBALS["lang"]["page_title"].":<br /><input name='titel' size='20'><br />
+                ".$GLOBALS["lang"]["page_include"].": <input type='checkbox' name='include' value='true'> ".$GLOBALS["lang"]["page_include_info"]."<br />
+                ".$GLOBALS["lang"]["page_content"].":<br />
                 <textarea name='pagecontent' cols='70' rows='35'></textarea> <br />
-                <input type='submit' value='Absenden'>";
+                <input type='submit' value='".$GLOBALS["lang"]["submit"]."'>";
     		}
     	} else {
-    	    echo "Nicht ausreichende Rechte!";
+    	    echo $GLOBALS["lang"]["not_enough_rights"];
     	}
     } else if (isset ($_GET["delete"])) {
     	if ($rechte == "1") {
     	    if(!isset($_GET["page"])) {
                 $query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` ASC";
         		$result = $mysqli->query($query);
-                // if($debug) { var_dump($result); }
         		while ($row = mysqli_fetch_object($result)) {
-        		    // if($debug) { var_dump($row); }
-        			$titel = $row->name;
+        			$title = $row->name;
                     $id = $row->id;
-        			echo "<a href='?id=0&amp;ap=Pages&amp;delete=true&amp;page=".$id."'>".$titel."</a><br />\n";
+        			echo "<a href='?id=0&amp;ap=Pages&amp;delete=true&amp;page=".$id."'>".$title."</a><br />\n";
         		}
             } else {
                 $pageid = $mysqli->real_escape_string($_GET["page"]);
@@ -62,13 +56,13 @@ if($isinclude) {
                 echo "ID der Seite: ". $row->id ." <br /> \n
                 Name: " . $row->name . "<br /> \n
                 Erstellungsdatum: " . $row->date_created . "<br /> \n
-                Seite aus /includes/?: " . $row->include . "<br /> \n";
+                ".$GLOBALS["lang"]["page_include"].": " . $row->include . "<br /> \n";
 
                 echo "<a href='?id=0&ap=Pages&pageid=".$pageid."&action=delete'>L&ouml;schen</a>";
 
             }
     	} else {
-    	    echo "Nicht ausreichende Rechte!";
+    	    echo $GLOBALS["lang"]["not_enough_rights"];
     	}
     } elseif (isset ($_GET["reihenfolge"]) && $_GET["reihenfolge"]) {
     	echo "Reihenfolge<br />";
@@ -84,12 +78,12 @@ if($isinclude) {
     		$i = 1;
     		while ($row = mysqli_fetch_object($result)) {
     		    // if($debug) { var_dump($row); }
-    			$titel = $row->name;
+    			$title = $row->name;
     			$position = $row->position;
-    			echo "" . $titel . ": <input name='position[" . $i . "]' value='" . $position . "' size='3'><br />\n";
+    			echo "" . $title . ": <input name='position[" . $i . "]' value='" . $position . "' size='3'><br />\n";
     			$i++;
     		}
-    		echo "<input type='submit' value='Absenden'>";
+    		echo "<input type='submit' value='".$GLOBALS["lang"]["submit"]."'>";
     	} else {
     		$query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99";
     		$result = $mysqli->query($query);
@@ -143,22 +137,22 @@ if($isinclude) {
                     <input type='hidden' name='ap' value='Pages'>
                     <input type='hidden' name='pageid' value='" . $pageid . "'>
                     <input type='hidden' name='action' value='update'>
-                    Titel:<br /><input name='titel' value='" . $row->name . "' size='20'><br />
-                    Seite aus /includes/: <input type='checkbox' name='include' value='1'";
+                    ".$GLOBALS["lang"]["page_title"].":<br /><input name='titel' value='" . $row->name . "' size='20'><br />
+                    ".$GLOBALS["lang"]["page_include"].": <input type='checkbox' name='include' value='1'";
                     if ($row->included == "1") {
                         echo " checked";
                     }
                     echo "><br />
-                    Seiteninhalt:<br />
+                    ".$GLOBALS["lang"]["page_content"].":<br />
                     <textarea name='pagecontent' cols='60' rows='20'>" . $row->content . "</textarea> <br />
-                    <input type='submit' value='Absenden'>";
+                    <input type='submit' value='".$GLOBALS["lang"]["submit"]."'>";
                 }
     		}
     	} else {
     		if ($rechte == "1") {
-    			echo '<a href="?id=0&ap=Pages&neu=true">Neue Seite erstellen</a><br />';
-                echo '<a href="?id=0&ap=Pages&delete=true">Bestehende Seite löschen</a><br />';
-    			echo '<a href="?id=0&ap=Pages&reihenfolge=true">Reihenfolge der Seiten ändern</a>';
+    			echo '<a href="?id=0&ap=Pages&neu=true">'.$GLOBALS['lang']['create_page'].'</a><br />';
+                echo '<a href="?id=0&ap=Pages&delete=true">'.$GLOBALS['lang']['delete_page'].'</a><br />';
+    			echo '<a href="?id=0&ap=Pages&reihenfolge=true">'.$GLOBALS['lang']['order_page'].'</a>';
     		}
     		$query = "SELECT * FROM `pages`";
     		$num_res = $mysqli->query($query);
@@ -167,9 +161,9 @@ if($isinclude) {
     		$result = $mysqli->query($query);
     		$i = 0;
     		while ($row = mysqli_fetch_object($result)) {
-    			$titel = $row->name;
-    			$datum = mysqlDate($row->date_created);
-    			echo "<h2 class='title'><a href='?id=0&ap=Pages&pageid=" . $row->id . "'>" . $titel . "</a> on " . $datum . "</h2>";
+    			$title = $row->name;
+    			$date = mysqlDate($row->date_created);
+    			echo "<h2 class='title'><a href='?id=0&ap=Pages&pageid=" . $row->id . "'>" . $title . "</a> ".$GLOBALS["lang"]["date"]." " . $date . "</h2>";
     			$i++;
     		}
     	}

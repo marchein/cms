@@ -1,79 +1,79 @@
 ﻿<?php
 function document() {
-  return $_SERVER["DOCUMENT_ROOT"] . "/";
+    return $_SERVER["DOCUMENT_ROOT"] . "/";
 }
 
 function url() {
-  $url = str_replace("/index.php", "", $_SERVER["PHP_SELF"]);
-  return "http://" . $_SERVER["HTTP_HOST"] . $url . "";
+    $url = str_replace("/index.php", "", $_SERVER["PHP_SELF"]);
+    return "http://" . $_SERVER["HTTP_HOST"] . $url . "";
 }
 
 function getLoginsend() {
-      return $GLOBALS["loginsend"];
+    return $GLOBALS["loginsend"];
 }
 
 function mysqlDate($date) {
-  $mysqldate = strtotime($date);
-  $phpdate = date('d.m.Y', $mysqldate);
-  return $phpdate;
+    $mysqldate = strtotime($date);
+    $phpdate = date('d.m.Y', $mysqldate);
+    return $phpdate;
 }
 
 function getDebug() {
-  $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli"]->query($query);
-  $config = mysqli_fetch_object($result);
-  return $config->debug;
+    $query = "SELECT * FROM `config` WHERE `id` = 1";
+    $result = $GLOBALS["mysqli"]->query($query);
+    $config = mysqli_fetch_object($result);
+    return $config->debug;
 }
 
 function getVersion() {
-  $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli"]->query($query);
-  $config = mysqli_fetch_object($result);
-  $version = $config->version;
-  return $version;
+    $query = "SELECT * FROM `config` WHERE `id` = 1";
+    $result = $GLOBALS["mysqli"]->query($query);
+    $config = mysqli_fetch_object($result);
+    $version = $config->version;
+    return $version;
 }
 
 function getVersionName() {
-  $parts = explode(".", getVersion());
-  if (!$parts[0] == 0) {
-    $versionname = "Public";
-  } else {
-    if (!$parts[1] == 0) {
-      $versionname = "Beta";
+    $parts = explode(".", getVersion());
+    if (!$parts[0] == 0) {
+        $versionname = "Public";
     } else {
-      $versionname = "Alpha";
+        if (!$parts[1] == 0) {
+            $versionname = "Beta";
+        } else {
+            $versionname = "Alpha";
+        }
     }
-  }
-  return $versionname;
+    return $versionname;
 }
 
 function setVersion($version) {
-  $query = "UPDATE `config` SET `version` = '" . mysqli_real_escape_string($GLOBALS["mysqli"], $version) . "' WHERE `config`.`id` = 1;";
-  $result = $GLOBALS["mysqli"]->query($query);
+    $query = "UPDATE `config` SET `version` = '" . mysqli_real_escape_string($GLOBALS["mysqli"], $version) . "' WHERE `config`.`id` = 1;";
+    $result = $GLOBALS["mysqli"]->query($query);
 }
 
 function getBuild() {
-  $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli"]->query($query);
-  $config = mysqli_fetch_object($result);
-  return $config->build;
+    $query = "SELECT * FROM `config` WHERE `id` = 1";
+    $result = $GLOBALS["mysqli"]->query($query);
+    $config = mysqli_fetch_object($result);
+    return $config->build;
 }
 
 function setBuild() {
-  $build = getBuild();
-  if ($build == "") {
-    $build = 0;
-  }
-  $build++;
-  $query = "UPDATE `config` SET `build` = '" . $build . "' WHERE `config`.`id` = 1;";
-  $result = $GLOBALS["mysqli"]->query($query);
+    $build = getBuild();
+    if ($build == "") {
+        $build = 0;
+    }
+    $build++;
+    $query = "UPDATE `config` SET `build` = '" . $build . "' WHERE `config`.`id` = 1;";
+    $result = $GLOBALS["mysqli"]->query($query);
 }
 
 function showAdmin() {
-  $query = "SELECT * FROM `config` WHERE `id` = 1";
-  $result = $GLOBALS["mysqli"]->query($query);
-  $config = mysqli_fetch_object($result);
-  return $config->show_admin;
+    $query = "SELECT * FROM `config` WHERE `id` = 1";
+    $result = $GLOBALS["mysqli"]->query($query);
+    $config = mysqli_fetch_object($result);
+    return $config->show_admin;
 }
 
 function getPageName() {
@@ -98,10 +98,10 @@ function getCurrentPageName($id, $newsid) {
 }
 
 function getRechteName($rechte) {
-    if($rechte == 0) { $rechtename = "Gesperrt"; }
-    if($rechte == 1) { $rechtename = "Administrator"; }
-    if($rechte == 2) { $rechtename = "Moderator"; }
-    if($rechte == 3) { $rechtename = "Nutzer"; }
+    if($rechte == 0) { $rechtename = $GLOBALS['lang']['disabled']; }
+    if($rechte == 1) { $rechtename = $GLOBALS['lang']['administrator']; }
+    if($rechte == 2) { $rechtename = $GLOBALS['lang']['moderator']; }
+    if($rechte == 3) { $rechtename = $GLOBALS['lang']['normal_user']; }
     return $rechtename;
 }
 
@@ -150,7 +150,7 @@ function getJS() {
         <script src="'.$js.'"></script>';
         }
     }
-    getLoggedIn();
+    getLoggedInJS();
     echo "\n";
 }
 
