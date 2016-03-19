@@ -1,7 +1,7 @@
 ﻿<?php
 require_once("features.php");
 function getHash($hash){
-    return hash('SHA512', $hash);
+    return hash('SHA512', $hash."HeinCMS_2016");
 }
 
 function getHeaders() {
@@ -55,16 +55,26 @@ function getDebugFooter() {
 
 function getLanguage() {
     if(isset($_GET["lang"])) {
+        // if ?lang=de for example is set in the url, lang is set to $_GET["lang"]
         $lang = $_GET["lang"];
         // register the session and set the cookie
         $_SESSION["lang"] = $lang;
         setcookie('lang', $lang, time() + (3600 * 24 * 30));
     } else if(isset($_SESSION["lang"])) {
+        // set lang to the lang saved in the session
         $lang = $_SESSION["lang"];
     } else if(isset($_COOKIE["lang"])) {
+        // set lang to the lang saved in the cookie
         $lang = $_COOKIE["lang"];
+    } else if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        // set lang to the system language
+        $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+        // register the session and set the cookie
+        $_SESSION["lang"] = $lang;
+        setcookie('lang', $lang, time() + (3600 * 24 * 30));
     } else {
-        $lang = "de";
+        // if everything else fails, set lang to english
+        $lang = "en";
     }
 
     return $lang;
@@ -72,16 +82,19 @@ function getLanguage() {
 
 function includeLanguage($lang) {
     switch($lang) {
+        // if $lang == de, set lang to german
         case "de":
         $lang_file = "de.lang.php";
         break;
+        // if $lang == en or not set, set lang to english
         case "en":
         default:
         $lang_file = "en.lang.php";
         break;
     }
-
+    // include the language file once
     include_once("includes/languages/".$lang_file);
+    // return the language array of the lang file
     return $language;
 }
 
