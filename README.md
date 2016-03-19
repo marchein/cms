@@ -27,4 +27,4 @@ Great!  [Create an issue](https://github.com/marchein/cms/issues), or, better ye
 
 ## Todo
 
-- Improve SHA512 hashing
+- Update user account page
