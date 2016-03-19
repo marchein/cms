@@ -72,9 +72,9 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `name`, `date_created`, `position`, `included`, `content`) VALUES
-(0, 'Admin', '2015-06-19 10:46:11', '99', 1, 'Interner Bereich'),
+(0, 'Admin', '2015-06-19 10:46:11', '99', 1, NULL),
 (1, 'Home', '2015-06-18 06:41:52', '1', 0, '<p>Herzlich willkommen, beim neuen HeinCMS v2!<br /><br />Dieses CMS ist momentan im Aufbau und wird regelm&auml;&szlig;ig &uuml;berarbeitet.</p>\r\n<p>Mehr auf dem Git Repo unter: <a title="Github" href="https://github.com/marchein/cms">github.com/marchein/cms</a></p>'),
-(2, 'News', '2015-06-20 15:59:52', '2', 1, '');
+(2, 'News', '2015-06-20 15:59:52', '2', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `full_name`, `name`, `email`, `rechte`, `password`, `length`) VALUES
-(1, NULL, 'dummy', 'user@server.com', '1', '6ba028366ebcdcef1ce3d73883c3475def4b7925f80e800bc82d91aa4430093622f9f95d20894022864dfa55d9c901ff520e070132eafabdae62a73e5ceeaed1', '3');
+(1, NULL, 'dummy', 'user@server.com', '1', '5372abca182d7a06992ce1d428ff5d4a20e56b4e6e3e637b1fe9817a0c3affbdd9336ed9ee968f905eddf8c2d40c9c49d073ab046bc46ee932ba7fbb098f060f', '3');
 
 --
 -- Indizes der exportierten Tabellen
