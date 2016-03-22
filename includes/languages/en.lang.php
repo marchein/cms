@@ -14,6 +14,7 @@ $language['admin'] = "Adminpanel";
 $language['login'] = "Login";
 $language['logout'] = "Logout";
 $language['username'] = "Username";
+$language['password'] = "Password";
 $language['submit'] = "Submit";
 $language['date'] = "on";
 
