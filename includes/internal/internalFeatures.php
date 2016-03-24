@@ -80,17 +80,28 @@ function getLanguage() {
     return $lang;
 }
 
+function getLanguageFiles() {
+    $result[] = array();
+    $dir = "includes/languages";
+    if (@$handle = opendir($dir)) {
+        $i = 0;
+        while (($entry = readdir($handle)) !== false) {
+            if ($entry != "." && $entry != "..") {
+                preg_match("/\b\w{2}\b/", $entry, $lang);
+                $result[$i] = $lang[0];
+                $i++;
+            }
+        }
+    }
+    closedir($handle);
+    return $result;
+}
+
 function includeLanguage($lang) {
-    switch($lang) {
-        // if $lang == de, set lang to german
-        case "de":
-        $lang_file = "de.lang.php";
-        break;
-        // if $lang == en or not set, set lang to english
-        case "en":
-        default:
+    if(in_array($lang, getLanguageFiles())) {
+        $lang_file = $lang.".lang.php";
+    } else {
         $lang_file = "en.lang.php";
-        break;
     }
     // include the language file once
     include_once("includes/languages/".$lang_file);
