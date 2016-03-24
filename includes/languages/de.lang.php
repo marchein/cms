@@ -10,11 +10,6 @@ $language = array();
 
 $language['edit'] = "Bearbeiten";
 $language['menu'] = "Menü";
-$language['admin'] = "Admin Panel";
-$language['login'] = "Anmelden";
-$language['logout'] = "Abmelden";
-$language['username'] = "Nutzername";
-$language['password'] = "Passwort";
 $language['submit'] = "Absenden";
 $language['date'] = "am";
 
@@ -26,6 +21,11 @@ $language['moderator'] = "Moderator";
 $language['normal_user'] = "Nutzer";
 
 // Intern
+$language['admin'] = "Admin Panel";
+$language['login'] = "Anmelden";
+$language['logout'] = "Abmelden";
+$language['username'] = "Nutzername";
+$language['password'] = "Passwort";
 $language['please_login'] = "Bitte anmelden";
 $language['intern'] = "Interner Bereich";
 $language['loggedin'] = "Erfolgreich angemeldet! Klicke <a href=\"?id=0\">hier</a> um fortzufahren.";
