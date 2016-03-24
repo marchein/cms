@@ -28,3 +28,7 @@ Great!  [Create an issue](https://github.com/marchein/cms/issues), or, better ye
 ## Todo
 
 - Update user account page
+
+## Help me!
+
+- You can help me [here to translate](https://www.transifex.com/hein-1/heincms/) the cms!
