@@ -99,12 +99,12 @@ function getLanguageFiles() {
 
 function includeLanguage($lang) {
     if(in_array($lang, getLanguageFiles())) {
-        $lang_file = $lang.".lang.php";
+        $lang_file = $lang;
     } else {
-        $lang_file = "en.lang.php";
+        $lang_file = "en";
     }
     // include the language file once
-    include_once("includes/languages/".$lang_file);
+    include_once("includes/languages/".$lang_file.".lang.php");
     // return the language array of the lang file
     return $language;
 }
