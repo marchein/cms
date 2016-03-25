@@ -40,6 +40,9 @@ $language['pages'] = "Pages management";
 $language['theme'] = "Design managment";
 $language['user'] = "User management";
 
+// Config
+$language['mysql_error'] = "MySQL error";
+$language['mysql_error_help'] = "Maybe you put the wrong host into '/includes/internal/config.php'? [In 99% of all cases 'localhost' is correct.]";
 
 // Debug
 $language['cmsfolder'] = "The cms runs in:";
