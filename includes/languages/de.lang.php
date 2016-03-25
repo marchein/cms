@@ -42,7 +42,7 @@ $language['user'] = "Nutzer Verwaltung";
 
 // Config
 $language['mysql_error'] = "MySQL Fehler";
-$language['mysql_error_help'] = "Eventuell falschen Host in '/includes/internal/config.php' eingestellt? [In 99% der Fälle ist 'localhost' korrekt.]";
+$language['mysql_error_help'] = "Eventuell falschen Host in '/includes/internal/config.php' eingestellt? [In den meisten Fällen ist 'localhost' korrekt.]";
 
 // Debug
 $language['cmsfolder'] = "Das CMS läuft in:";
@@ -61,7 +61,7 @@ $language['page_created'] = "Seite erfolgreich angelegt<br />Klicke <a href=\"?i
 $language['page_title'] = "Titel";
 $language['page_content'] = "Seiteninhalt";
 $language['page_include'] = "Seite aus /includes/pages/";
-$language['page_include_info'] = "(Wenn dieses Feld ausgewählt wurde, muss die Datei im /includes/pages/ mit dem Dateinamen \"&#60;Seitentitel&#62;content.php\" liegen. Außerdem wird der Inhalt im Feld \"Seiteninhalt\" ignoriert.";
+$language['page_include_info'] = "(Wenn dieses Feld ausgewählt wurde, muss die Datei im /includes/pages/ mit dem Dateinamen \"&#60;Seitentitel&#62;content.php\" liegen. Außerdem wird der Inhalt im Feld \"Seiteninhalt\" ignoriert.)";
 $language['create_page'] = "Neue Seite erstellen";
 $language['delete_page'] = "Bestehende Seite löschen";
 $language['order_page'] = "Reihenfolge der Seiten ändern";

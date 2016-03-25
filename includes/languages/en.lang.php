@@ -42,7 +42,7 @@ $language['user'] = "User management";
 
 // Config
 $language['mysql_error'] = "MySQL error";
-$language['mysql_error_help'] = "Maybe you put the wrong host into '/includes/internal/config.php'? [In 99% of all cases 'localhost' is correct.]";
+$language['mysql_error_help'] = "Maybe you put the wrong host into '/includes/internal/config.php'? [In most cases 'localhost' is correct.]";
 
 // Debug
 $language['cmsfolder'] = "The cms runs in:";
@@ -61,7 +61,7 @@ $language['page_created'] = "Page successfully created<br />Click <a href=\"?id=
 $language['page_title'] = "Title";
 $language['page_content'] = "Pagecontent";
 $language['page_include'] = "Page from /includes/pages/";
-$language['page_include_info'] = "(Wenn dieses Feld ausgewählt wurde, muss die Datei im /includes/pages/ mit dem Dateinamen \"&#60;Seitentitel&#62;content.php\" liegen. Außerdem wird der Inhalt im Feld \"Seiteninhalt\" ignoriert.";
+$language['page_include_info'] = "(If the box is selected, the file with the filename \"&#60;Pagename&#62;content.php\" must be inside of /includes/pages/. Also the content of the field \"pagecontent\" will be ignored.)";
 $language['create_page'] = "Create new page";
 $language['delete_page'] = "Delete existing page";
 $language['order_page'] = "Change order of the pages";
