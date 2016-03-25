@@ -1,17 +1,4 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Erstellungszeit: 09. Mrz 2016 um 22:56
--- Server-Version: 10.1.10-MariaDB
--- PHP-Version: 5.6.19
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
---
+﻿--
 -- Datenbank: `cms`
 --
 
@@ -87,7 +74,7 @@ CREATE TABLE `user` (
   `full_name` varchar(128) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `rechte` varchar(128) DEFAULT NULL,
+  `rights` varchar(128) DEFAULT NULL,
   `password` text,
   `length` varchar(128) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -96,7 +83,7 @@ CREATE TABLE `user` (
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`ID`, `full_name`, `name`, `email`, `rechte`, `password`, `length`) VALUES
+INSERT INTO `user` (`ID`, `full_name`, `name`, `email`, `rights`, `password`, `length`) VALUES
 (1, NULL, 'dummy', 'user@server.com', '1', '5372abca182d7a06992ce1d428ff5d4a20e56b4e6e3e637b1fe9817a0c3affbdd9336ed9ee968f905eddf8c2d40c9c49d073ab046bc46ee932ba7fbb098f060f', '3');
 
 --
