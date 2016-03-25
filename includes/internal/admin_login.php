@@ -1,15 +1,15 @@
 ﻿<?php
-function getRechte($user) {
+function getRights($user) {
     $user = mysqli_real_escape_string($GLOBALS["mysqli"], $user);
-    $query   = "SELECT rechte FROM `user` WHERE name ='".$user."'";
+    $query   = "SELECT rights FROM `user` WHERE name ='".$user."'";
     $result = $GLOBALS["mysqli"]->query($query);
     $data = mysqli_fetch_object($result);
     if(mysqli_num_rows($result) > 0) {
-        $rechte = $data->rechte;
+        $userrights = $data->rights;
     } else {
-        $rechte = 0;
+        $userrights = 0;
     }
-    return $rechte;
+    return $userrights;
 }
 
 session_start();
@@ -54,7 +54,7 @@ if (isset($_GET["log_out"]) && $_GET["log_out"]) {
 
 $is_login = $_SESSION["is_login"];
 $username = $_SESSION["username"];
-$rechte = getRechte($username);
+$userrights = getRights($username);
 $GLOBALS["is_login"] = $is_login;
 $GLOBALS["loginsend"] = $loginsend;
 

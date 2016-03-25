@@ -1,6 +1,6 @@
 ﻿<?php
 $username = $_SESSION["username"];
-$rechte = getRechte($username);
+$userrights = getRights($username);
 
 echo "<h1>".$GLOBALS['lang']['intern']."</h1>\n";
     if(getLoginsend() == 1) {

@@ -7,7 +7,7 @@ if($isinclude) {
         if(isset($_GET["userid"])) {
             $userid = $mysqli->real_escape_string($_GET["userid"]);
         }
-        if($rechte == 1) {
+        if($userrights == 1) {
             if(isset($userid)) {
                 $query = "SELECT * FROM `user` WHERE `id` = ".$userid;
                 $result = $mysqli->query($query);
@@ -18,7 +18,7 @@ if($isinclude) {
                 Username: " . $user->name . "<br />
                 Voller Name: " . $fullname . "<br />
                 E-Mail Adresse: " . $user->email . "<br />
-                Rechte: " . getRechteName($user->rechte) . "<br />";
+                Rechte: " . getRightsName($user->rights) . "<br />";
             } else {
                 $query = "SELECT * FROM `user`";
                 $result = $mysqli->query($query);
@@ -33,7 +33,7 @@ if($isinclude) {
                     if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
                     echo "<tr>
                         <td><a href='?id=0&ap=User&userlist=true&amp;userid=".$row->ID."'>".$row->name."</a> (".$fullname.")</td>
-                        <td>".getRechteName($row->rechte)."</td>
+                        <td>".getRightsName($row->rights)."</td>
                     </tr>";
                 }
                 echo "</table>";

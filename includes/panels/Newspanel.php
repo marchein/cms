@@ -4,7 +4,7 @@ $panelnames[$panelname] = $GLOBALS['lang']['news'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset($_GET["neu"])) {
-    	if ($rechte == "1") {
+    	if ($userrights == "1") {
     		if (@ $_POST["action"] == "write") {
     			$titel = htmlspecialchars($_POST['titel']);
     			$content = htmlspecialchars($_POST['newscontent']);
@@ -56,7 +56,7 @@ if($isinclude) {
                 }
     		}
     	} else {
-    		if ($rechte == "1") {
+    		if ($userrights == "1") {
     			echo '<a href="?id=0&amp;ap=News&amp;neu=true">Neue News erstellen</a><br />';
     		}
     		$query = "SELECT * FROM `pages`";

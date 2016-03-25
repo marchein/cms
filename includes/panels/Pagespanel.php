@@ -4,7 +4,7 @@ $panelnames[$panelname] = $GLOBALS['lang']['pages'];
 if(!isset($isinclude)) { $isinclude = true; }
 if($isinclude) {
     if (isset ($_GET["neu"])) {
-    	if ($rechte == "1") {
+    	if ($userrights == "1") {
     		if (@ $_POST["action"] == "write") {
     			$title = $_POST['titel'];
     			$title = htmlspecialchars($title);
@@ -37,7 +37,7 @@ if($isinclude) {
     	    echo $GLOBALS["lang"]["not_enough_rights"];
     	}
     } else if (isset ($_GET["delete"])) {
-    	if ($rechte == "1") {
+    	if ($userrights == "1") {
     	    if(!isset($_GET["page"])) {
                 $query = "SELECT * FROM `pages` WHERE `position` >= 0 AND `position` < 99 ORDER BY `id` ASC";
         		$result = $mysqli->query($query);
@@ -149,7 +149,7 @@ if($isinclude) {
                 }
     		}
     	} else {
-    		if ($rechte == "1") {
+    		if ($userrights == "1") {
     			echo '<a href="?id=0&ap=Pages&neu=true">'.$GLOBALS['lang']['create_page'].'</a><br />';
                 echo '<a href="?id=0&ap=Pages&delete=true">'.$GLOBALS['lang']['delete_page'].'</a><br />';
     			echo '<a href="?id=0&ap=Pages&reihenfolge=true">'.$GLOBALS['lang']['order_page'].'</a>';

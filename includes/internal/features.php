@@ -97,12 +97,12 @@ function getCurrentPageName($id, $newsid) {
     }
 }
 
-function getRechteName($rechte) {
-    if($rechte == 0) { $rechtename = $GLOBALS['lang']['disabled']; }
-    if($rechte == 1) { $rechtename = $GLOBALS['lang']['administrator']; }
-    if($rechte == 2) { $rechtename = $GLOBALS['lang']['moderator']; }
-    if($rechte == 3) { $rechtename = $GLOBALS['lang']['normal_user']; }
-    return $rechtename;
+function getRightsName($userrights) {
+    if($userrights == 0) { $userrightsname = $GLOBALS['lang']['disabled']; }
+    if($userrights == 1) { $userrightsname = $GLOBALS['lang']['administrator']; }
+    if($userrights == 2) { $userrightsname = $GLOBALS['lang']['moderator']; }
+    if($userrights == 3) { $userrightsname = $GLOBALS['lang']['normal_user']; }
+    return $userrightsname;
 }
 
 if(getDebug()) {
