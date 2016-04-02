@@ -26,6 +26,7 @@ $language['login'] = "Login";
 $language['logout'] = "Logout";
 $language['username'] = "Username";
 $language['password'] = "Password";
+$language['forgot_password'] = "Forgot your password?";     
 $language['please_login'] = "Please login";
 $language['intern'] = "Internal area";
 $language['loggedin'] = "Succesfully logged in! Click <a href=\"?id=0\">here</a> to continue.";

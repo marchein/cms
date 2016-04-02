@@ -26,6 +26,7 @@ $language['login'] = "Anmelden";
 $language['logout'] = "Abmelden";
 $language['username'] = "Nutzername";
 $language['password'] = "Passwort";
+$language['forgot_password'] = "Passwort vergessen?"; 
 $language['please_login'] = "Bitte anmelden";
 $language['intern'] = "Interner Bereich";
 $language['loggedin'] = "Erfolgreich angemeldet! Klicke <a href=\"?id=0\">hier</a> um fortzufahren.";
