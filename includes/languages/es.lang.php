@@ -22,11 +22,11 @@ $language['normal_user'] = "Tuitero";
 
 // Intern
 $language['admin'] = "Administrador";
-$language['login'] = "Acceso";
+$language['login'] = "Conéctate";
 $language['logout'] = "Desconectarse";
-$language['username'] = "Usuario";
+$language['username'] = "Nombre de Usuario";
 $language['password'] = "Contraseña";
-$language['forgot_password'] = "¿Has olvidado tu contraseña?";   
+$language['forgot_password'] = "¿Contraseña olvidada?";
 $language['please_login'] = "Por favor inicia sesión";
 $language['intern'] = "Interno";
 $language['loggedin'] = "¡Inicio de sesión exitoso! Clic <a href=\"?id=0\">aquí</a> para continuar.";
