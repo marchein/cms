@@ -1,5 +1,16 @@
 ﻿<?php
-require_once("features.php");
+try {
+    if(!((isset($mysql_server) && !empty($mysql_server)) &&
+             (isset($mysql_username) && !empty($mysql_username)) &&
+             (isset($mysql_password) && !empty($mysql_password)) &&
+             (isset($mysql_database) && !empty($mysql_database)) || getDebug() == 1)) {
+                 throw new Exception ("MySQL Daten stimmen nicht überein");
+    }
+
+    require_once("features.php");
+} catch (Exception $e) {
+    die("<h3>".$GLOBALS["lang"]["mysql_error"].": ". $mysqli->connect_error ."</h3>\n<br/>".$GLOBALS["lang"]["mysql_error_help"]);
+}
 function getHash($hash){
     return hash('SHA512', $hash."HeinCMS_2016");
 }
@@ -40,6 +51,13 @@ function getNavigation() {
 
 function getContent() {
   include ($GLOBALS["path"]."/content.tpl.php");
+}
+
+function getDebug() {
+    $query = "SELECT * FROM `config` WHERE `id` = 1";
+    $result = $GLOBALS["mysqli"]->query($query);
+    $config = mysqli_fetch_object($result);
+    return $config->debug;
 }
 
 function getDebugFooter() {

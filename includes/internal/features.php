@@ -18,13 +18,6 @@ function mysqlDate($date) {
     return $phpdate;
 }
 
-function getDebug() {
-    $query = "SELECT * FROM `config` WHERE `id` = 1";
-    $result = $GLOBALS["mysqli"]->query($query);
-    $config = mysqli_fetch_object($result);
-    return $config->debug;
-}
-
 function getVersion() {
     $query = "SELECT * FROM `config` WHERE `id` = 1";
     $result = $GLOBALS["mysqli"]->query($query);
