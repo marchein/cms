@@ -23,7 +23,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `name`, `mail`, `debug`, `version`, `build`, `theme`) VALUES
-(1, 'HeinCMS', 'user@server.com', '0', '0.1.0', '4268', 'bootstrap');
+(1, 'HeinCMS', 'user@server.com', '1', '0.1.1', '4268', 'bootstrap');
 
 -- --------------------------------------------------------
 
