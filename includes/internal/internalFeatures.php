@@ -9,7 +9,7 @@ try {
 
     require_once("features.php");
 } catch (Exception $e) {
-    die("<h3>".$GLOBALS["lang"]["mysql_error"].": ". $mysqli->connect_error ."</h3>\n<br/>".$GLOBALS["lang"]["mysql_error_help"]);
+    die("<h1>".$GLOBALS["lang"]["mysql_error"].": ". $mysqli->connect_error ."</h1>\n<br/>".$GLOBALS["lang"]["mysql_error_help"]);
 }
 function getHash($hash){
     return hash('SHA512', $hash."HeinCMS_2016");
