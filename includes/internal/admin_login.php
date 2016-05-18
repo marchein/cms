@@ -21,14 +21,14 @@ if(isset($_POST['login']))  {
     @$pw    = $data->password;
 }
 
-if (!isset($_SESSION['is_login'])) {
+/*if (!isset($_SESSION['is_login'])) {
     $_SESSION['is_login'] = false;
 }
 
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['username'] = null;
-}
+}*/
 
 $loginsend = 0;
 
@@ -48,15 +48,17 @@ if (@$_POST["log_in"]) {
 if (isset($_GET["log_out"]) && $_GET["log_out"]) {
     $is_login  = false;
     $loginsend = 3;
-    session_destroy();
+    unset($_SESSION['is_login']);
+    unset($_SESSION['username']);
 }
 
 
-$is_login = $_SESSION["is_login"];
-$username = $_SESSION["username"];
-$userrights = getRights($username);
-$GLOBALS["is_login"] = $is_login;
-$GLOBALS["loginsend"] = $loginsend;
-
+if(isset($_SESSION["is_login"]) && isset($_SESSION["is_login"])) {
+	$is_login = $_SESSION["is_login"];
+	$username = $_SESSION["username"];
+	$userrights = getRights($username);
+	$GLOBALS["is_login"] = $is_login;
+	$GLOBALS["loginsend"] = $loginsend;
+}
 
 ?>
