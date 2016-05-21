@@ -7,12 +7,15 @@ function getHash($hash){
 function getHeaders() {
     if (@$_GET["id"] == "0" && getLoginsend() == 1) {
         header("refresh:2;url=".url()."?id=0");
+        exit();
     }
     elseif (@$_GET["id"] == "0" && getLoginsend() == 2) {
         header("refresh:2;url=".url()."?id=0");
+        exit();
     }
     elseif (@$_GET["id"] == "0" && getLoginsend() == 3) {
         header("refresh:2;url=".url());
+        exit();
     } else {
         header('Content-type: text/html; charset=utf-8');
     }
