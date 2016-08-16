@@ -5,4 +5,9 @@ if(isset($mysqli->connect_error)) {
 } else {
     $GLOBALS["mysqli"] = $mysqli;
 }
+
+function doQuery($query) {
+    $result = $GLOBALS["mysqli"]->query($query);
+    return $result;
+}
 ?>
