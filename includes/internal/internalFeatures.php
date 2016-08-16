@@ -8,6 +8,7 @@ try {
     }
 
     require_once("features.php");
+    require_once("userFeatures.php");
 } catch (Exception $e) {
     die("<h1>".$GLOBALS["lang"]["mysql_error"].": ". $mysqli->connect_error ."</h1>\n<br/>".$GLOBALS["lang"]["mysql_error_help"]);
 }

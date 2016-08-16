@@ -1,24 +1,20 @@
 ﻿<?php
 $panelname = "User";
-$panelnames[$panelname] = $GLOBALS['lang']['user'];
-if(!isset($isinclude)) { $isinclude = true; }
-if($isinclude) {
-    
-    /*
-    if(isset($_GET["userid"])) {
+$panelnames[$panelname] = $GLOBALS['lang']['user']; // set panel name
+if(!isset($isinclude)) { $isinclude = true; } // if unset, set it to true
+
+if($isinclude) { // if included don't run this code, if $isinclude is true -> run code
+
+    if ($userrights == "1" && ($_GET["userlist"])) {
+        if(isset($_GET["userid"])) {
             $userid = $mysqli->real_escape_string($_GET["userid"]);
         }
         if(isset($userid)) {
-            $query = "SELECT * FROM `user` WHERE `id` = ".$userid;
-            $result = $mysqli->query($query);
-            $user = mysqli_fetch_object($result);
-            $fullname = $user->full_name;
-            if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
-            echo "ID: " . $user->ID . "<br />
-            Username: " . $user->name . "<br />
-            Voller Name: " . $fullname . "<br />
-            E-Mail Adresse: " . $user->email . "<br />
-            Rechte: " . getRightsName($user->rights) . "<br />";
+            if($_GET["edit"]) {
+                editUser($userid);
+            } else {
+                showUser($userid);
+            }
         } else {
             $query = "SELECT * FROM `user`";
             $result = $mysqli->query($query);
@@ -38,6 +34,10 @@ if($isinclude) {
             }
             echo "</table>";
         }
-        */
+    } else if($userrights == 1) {
+        echo '<a href="?id=0&ap=User&amp;userlist=true">Nutzerliste anzeigen</a>';
+    } else {
+        echo "Nicht genügend Rechte. Nur Option eigenes Profil zu bearbeiten.";
+    }
 }
 ?>
