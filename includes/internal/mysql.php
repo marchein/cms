@@ -10,4 +10,8 @@ function doQuery($query) {
     $result = $GLOBALS["mysqli"]->query($query);
     return $result;
 }
+
+function mySQLfetch($result) {
+    $row = $result->fetch_object();
+}
 ?>

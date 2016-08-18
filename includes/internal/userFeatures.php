@@ -8,16 +8,13 @@ function escapeUser($userid) {
 
 function userExists($user) {
     $user = escapeUser($user);
-    $query   = "SELECT * FROM `user` WHERE ID ='".$user."'";
-    $result = $GLOBALS["mysqli"]->query($query);
-    $data = mysqli_fetch_object($result);
-    var_dump($data);
-    return (mysqli_num_rows($result) == 0);
+    $query   = "SELECT ID FROM `user` WHERE ID ='".$user."'";
+    $result = doQuery($query);
+    return ($result->num_rows != 0);
 }
 
 function editUser($userid) {
     if(isset($userid)) {
-        var_dump(userExists($userid));
         if(!userExists($userid)) {
             echo 'User existiert nicht!';
         } else {
@@ -27,8 +24,8 @@ function editUser($userid) {
             $userid = escapeUser($userid);
 
             $query = "SELECT * FROM `user` WHERE `id` = ".$userid;
-            $result = $GLOBALS["mysqli"]->query($query);
-            $user = mysqli_fetch_object($result);
+            $result = doQuery($query);
+            $user = $result->fetch_object();
             $fullname = $user->full_name;
             if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
             echo 'ID:<br />
@@ -51,8 +48,8 @@ function showUser($userid) {
     $userid = escapeUser($userid);
     if(isset($userid)) {
         $query = "SELECT * FROM `user` WHERE `id` = ".$userid;
-        $result = $GLOBALS["mysqli"]->query($query);
-        $user = mysqli_fetch_object($result);
+        $result = doQuery($query);
+        $user = $result->fetch_object();
         $fullname = $user->full_name;
         if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
         echo "ID: " . $user->ID . "<br />
@@ -67,10 +64,10 @@ function showUser($userid) {
 }
 
 function getUserID($username) {
-    $query = 'SELECT name FROM `user` WHERE `name` = ' . $username;
-    $result = $GLOBALS["mysqli"]->query($query);
-    $row = $result->fetch_object();
-    var_dump($row);
+    $query = 'SELECT name, ID FROM `user` WHERE `name` = ' . $username;
+    $result = doQuery($query);
+    $user = $result->fetch_object();
+    return $user->ID;
 }
 
 ?>
