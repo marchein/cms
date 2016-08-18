@@ -30,7 +30,6 @@ function getHeaders() {
     }
 }
 
-
 function getLoggedInJS() {
     if(@$_GET['id'] == "0" && $GLOBALS["is_login"]) {
     echo '
