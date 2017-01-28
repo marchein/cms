@@ -2,7 +2,7 @@
 $username = null;
 if(isset($_SESSION["username"])) {
     $username = $_SESSION["username"];
-    $userrights2 = getRights($username);
+    $userrights = getRights($username);
 }
 
 echo "<h1>".$GLOBALS['lang']['intern']."</h1>\n";
