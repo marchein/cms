@@ -31,7 +31,11 @@ function getHeaders() {
 }
 
 function getLoggedInJS() {
-    if(@$_GET['id'] == "0" && $GLOBALS["is_login"]) {
+    $is_login = 0;
+    if(isset($GLOBALS["is_login"])) {
+        $is_login = $GLOBALS["is_login"];
+    }
+    if(@$_GET['id'] == "0" && $is_login) {
     echo '
     <script src="js/tinymce/tinymce.min.js"></script>
     <script src="js/tinymce/init.js"></script>';

@@ -1,6 +1,9 @@
 ﻿<?php
-$username = $_SESSION["username"];
-$userrights = getRights($username);
+$username = null;
+if(isset($_SESSION["username"])) {
+    $username = $_SESSION["username"];
+    $userrights2 = getRights($username);
+}
 
 echo "<h1>".$GLOBALS['lang']['intern']."</h1>\n";
     if(getLoginsend() == 1) {

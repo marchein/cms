@@ -1,5 +1,8 @@
 ﻿<?php
-$is_login = $GLOBALS["is_login"];
+$is_login = 0;
+if(isset($GLOBALS["is_login"])) {
+    $is_login = $GLOBALS["is_login"];
+}
 echo '
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">

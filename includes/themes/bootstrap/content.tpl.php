@@ -2,7 +2,10 @@
     echo '<div class="container">';
     echo "\n";
 	$mysqli = $GLOBALS["mysqli"];
-	$is_login = $GLOBALS["is_login"];
+    $is_login = 0;
+    if(isset($GLOBALS["is_login"])) {
+        $is_login = $GLOBALS["is_login"];
+    }
 	$debug = getDebug();
 	@ $id = mysqli_real_escape_string($mysqli, $_GET["id"]);
 	if ($id == "") {
