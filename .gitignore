@@ -37,3 +37,4 @@ Thumbs.db
 # CMS files #
 #############
 includes/internal/config.php
+\.idea/
