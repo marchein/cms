@@ -5,17 +5,8 @@ if(!isset($isinclude)) { $isinclude = true; } // if unset, set it to true
 
 if($isinclude) { // if included don't run this code, if $isinclude is true -> run code
 
-    if ($userrights == "1" && ($_GET["userlist"])) {
-        if(isset($_GET["userid"])) {
-            $userid = $mysqli->real_escape_string($_GET["userid"]);
-        }
-        if(isset($userid)) {
-            if($_GET["edit"]) {
-                editUser($userid);
-            } else {
-                showUser($userid);
-            }
-        } else {
+    if(isset($_GET["userFunction"])) {
+    if ($userrights == "1" && $_GET["userFunction"] == "showList") {
             $query = "SELECT * FROM `user`";
             $result = $mysqli->query($query);
             // if($debug) { var_dump($result); }
@@ -26,18 +17,33 @@ if($isinclude) { // if included don't run this code, if $isinclude is true -> ru
             </tr>";
             while ($row = mysqli_fetch_object($result)) {
                 $fullname = $row->full_name;
-                if(!isset($fullname)) { $fullname = "Nicht angegeben"; }
+                if (!isset($fullname)) {
+                    $fullname = "Nicht angegeben";
+                }
                 echo "<tr>
-                    <td><a href='?id=0&ap=User&userlist=true&amp;userid=".$row->ID."'>".$row->name."</a> (".$fullname.")</td>
-                    <td>".getRightsName($row->rights)."</td>
+                    <td><a href='?id=0&ap=User&userFunction=showUser&amp;userid=" . $row->ID . "'>" . $row->name . "</a> (" . $fullname . ")</td>
+                    <td>" . getRightsName($row->rights) . "</td>
                 </tr>";
             }
             echo "</table>";
+    } elseif ($_GET["userFunction"] == "showUser") {
+        if (isset($_GET["userid"])) {
+            showUser($mysqli->real_escape_string($_GET["userid"]));
         }
-    } else if($userrights == 1) {
-        echo '<a href="?id=0&ap=User&amp;userlist=true">Nutzerliste anzeigen</a>';
+    } elseif ($_GET["userFunction"] == "editUser") {
+        if (isset($_GET["userid"])) {
+            editUser($mysqli->real_escape_string($_GET["userid"]));
+        }
+    } elseif ($_GET["userFunction"] == "editSelf") {
+        editUser(getUserID($_SESSION["username"]));
     } else {
-        echo "Nicht genügend Rechte. Nur Option eigenes Profil zu bearbeiten.";
+        echo "Fehler";
+    }
+    } else {
+        if ($userrights == 1) {
+            echo '<a href="?id=0&ap=User&amp;userFunction=showList">Nutzerliste anzeigen</a><br />';
+        }
+        echo '<a href="?id=0&ap=User&amp;userFunction=editSelf">Eigenes Profil bearbeiten</a><br />';
     }
 }
 ?>

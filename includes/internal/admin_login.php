@@ -1,7 +1,7 @@
 ﻿<?php
 function getRights($user) {
     $user = mysqli_real_escape_string($GLOBALS["mysqli"], $user);
-    $query   = "SELECT rights FROM `user` WHERE name ='".$user."'";
+    $query   = "SELECT rights FROM `user` WHERE `name` ='".$user."' OR `ID` = '".$user."'";
     $result = $GLOBALS["mysqli"]->query($query);
     $data = mysqli_fetch_object($result);
     if(mysqli_num_rows($result) > 0) {
